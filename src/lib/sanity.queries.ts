@@ -225,7 +225,12 @@ export const TEAM_MEMBERS_QUERY = groq`
 export const GALLERY_PHOTOS_QUERY = groq`
   *[_type == "galleryItem" && type == "photo"] | order(order asc) {
     title,
-    image,
+    image {
+      asset->{
+        _id,
+        url
+      }
+    },
     category,
     featured
   }
@@ -236,10 +241,18 @@ export const GALLERY_VIDEOS_QUERY = groq`
     title,
     videoSource,
     videoFile {
-      asset->
+      asset->{
+        _id,
+        url
+      }
     },
     videoUrl,
-    thumbnail,
+    thumbnail {
+      asset->{
+        _id,
+        url
+      }
+    },
     category,
     featured
   }
@@ -249,13 +262,26 @@ export const FEATURED_GALLERY_QUERY = groq`
   *[_type == "galleryItem" && featured == true] | order(order asc) [0...6] {
     title,
     type,
-    image,
+    image {
+      asset->{
+        _id,
+        url
+      }
+    },
     videoSource,
     videoFile {
-      asset->
+      asset->{
+        _id,
+        url
+      }
     },
     videoUrl,
-    thumbnail,
+    thumbnail {
+      asset->{
+        _id,
+        url
+      }
+    },
     category
   }
 `
