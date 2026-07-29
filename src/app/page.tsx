@@ -1,4 +1,6 @@
-import { sanityClient } from '@/lib/sanity.client'
+'use client'
+
+import { useSanity } from '@/hooks/useSanity'
 import { SITE_SETTINGS_QUERY, FEATURED_PROJECTS_QUERY, SERVICES_QUERY, FEATURED_GALLERY_QUERY } from '@/lib/sanity.queries'
 import HeroSection from '@/components/home/HeroSection'
 import StatsCounter from '@/components/home/StatsCounter'
@@ -7,11 +9,11 @@ import FeaturedProjects from '@/components/home/FeaturedProjects'
 import GalleryPreview from '@/components/home/GalleryPreview'
 import CTABanner from '@/components/home/CTABanner'
 
-export default async function HomePage() {
-  const siteSettings = await sanityClient.fetch(SITE_SETTINGS_QUERY)
-  const services = await sanityClient.fetch(SERVICES_QUERY)
-  const featuredProjects = await sanityClient.fetch(FEATURED_PROJECTS_QUERY)
-  const galleryItems = await sanityClient.fetch(FEATURED_GALLERY_QUERY)
+export default function HomePage() {
+  const { data: siteSettings } = useSanity(SITE_SETTINGS_QUERY)
+  const { data: services } = useSanity(SERVICES_QUERY)
+  const { data: featuredProjects } = useSanity(FEATURED_PROJECTS_QUERY)
+  const { data: galleryItems } = useSanity(FEATURED_GALLERY_QUERY)
   const primaryColor = siteSettings?.primaryColor || '#E65100'
 
   return (

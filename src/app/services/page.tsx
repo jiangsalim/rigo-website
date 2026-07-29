@@ -1,4 +1,6 @@
-import { sanityClient } from '@/lib/sanity.client'
+'use client'
+
+import { useSanity } from '@/hooks/useSanity'
 import { SERVICES_QUERY, SITE_SETTINGS_QUERY } from '@/lib/sanity.queries'
 import { urlFor } from '@/lib/sanity.image'
 import Link from 'next/link'
@@ -49,9 +51,9 @@ function ServiceCardIcon({ service, primaryColor }: { service: any; primaryColor
   )
 }
 
-export default async function ServicesPage() {
-  const services = await sanityClient.fetch(SERVICES_QUERY)
-  const siteSettings = await sanityClient.fetch(SITE_SETTINGS_QUERY)
+export default function ServicesPage() {
+  const { data: services } = useSanity(SERVICES_QUERY)
+  const { data: siteSettings } = useSanity(SITE_SETTINGS_QUERY)
   const primaryColor = siteSettings?.primaryColor || '#E65100'
 
   const categories = services?.reduce((acc: any, service: any) => {
@@ -77,7 +79,7 @@ export default async function ServicesPage() {
         <Container>
           {services?.length > 0 ? (
             <div className="space-y-20">
-              {Object.entries(categories).map(([category, categoryServices]: [string, any]) => (
+              {Object.entries(categories || {}).map(([category, categoryServices]: [string, any]) => (
                 <div key={category}>
                   <div className="flex items-center gap-3 mb-8">
                     <ServiceIcon category={category} primaryColor={primaryColor} />
