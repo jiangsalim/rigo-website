@@ -31,8 +31,8 @@ export default async function RootLayout({
   const navigation = await sanityClient.fetch(NAVIGATION_QUERY)
 
   return (
-    <html lang="en">
-      <head>
+    <html lang="en" data-scroll-behavior="smooth">
+     <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link 
