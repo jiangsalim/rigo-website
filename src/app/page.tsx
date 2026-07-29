@@ -18,7 +18,7 @@ export default async function HomePage() {
     <main>
       {/* 1. Hero — Navy */}
       <HeroSection
-        headline="Building The Future"
+        headline="Build The Future"
         subheadline="Premium Construction & Architectural Design"
         primaryColor={primaryColor}
         ctaButtons={[

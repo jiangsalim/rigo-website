@@ -99,7 +99,7 @@ export default function Footer({
               </div>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Premium construction and architectural design services. Building the future, one project at a time.
+              Premium construction and architectural design services. Build the future, one project at a time.
             </p>
 
             {/* Social Links */}

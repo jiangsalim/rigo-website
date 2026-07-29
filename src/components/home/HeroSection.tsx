@@ -18,7 +18,7 @@ interface HeroProps {
 }
 
 export default function HeroSection({
-  headline = 'Building The Future',
+  headline = 'Build The Future',
   subheadline = 'Premium construction and architectural design services',
   backgroundImage,
   ctaButtons,
