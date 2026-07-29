@@ -1,4 +1,6 @@
-import { sanityClient } from '@/lib/sanity.client'
+'use client'
+
+import { useSanity } from '@/hooks/useSanity'
 import { SITE_SETTINGS_QUERY } from '@/lib/sanity.queries'
 import Container from '@/components/ui/Container'
 import PageHero from '@/components/shared/PageHero'
@@ -6,8 +8,8 @@ import ContactForm from '@/components/shared/ContactForm'
 import { HiOutlineMail, HiOutlinePhone } from 'react-icons/hi'
 import { HiOutlineMapPin } from 'react-icons/hi2'
 
-export default async function ContactPage() {
-  const siteSettings = await sanityClient.fetch(SITE_SETTINGS_QUERY)
+export default function ContactPage() {
+  const { data: siteSettings } = useSanity(SITE_SETTINGS_QUERY)
   const primaryColor = siteSettings?.primaryColor || '#E65100'
 
   return (
@@ -25,7 +27,6 @@ export default async function ContactPage() {
       <section className="section-white pb-24">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Info */}
             <div>
               <h2 className="font-heading text-2xl font-bold text-navy mb-8">Contact Information</h2>
               <div className="space-y-6">
@@ -49,7 +50,7 @@ export default async function ContactPage() {
                     </div>
                     <div>
                       <p className="text-muted text-sm mb-1">Phone</p>
-                      <a href={`tel:${siteSettings.contactPhone.replace(/\D/g, '')}`} className="text-navy font-medium hover:text-[var(--accent)] transition-colors">
+                      <a href={`tel:${siteSettings.contactPhone?.replace(/\D/g, '')}`} className="text-navy font-medium hover:text-[var(--accent)] transition-colors">
                         {siteSettings.contactPhone}
                       </a>
                     </div>
@@ -68,7 +69,6 @@ export default async function ContactPage() {
                 )}
               </div>
 
-              {/* Google Map */}
               {siteSettings?.googleMapsUrl && (
                 <div className="mt-8 rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
                   <iframe
@@ -84,7 +84,6 @@ export default async function ContactPage() {
               )}
             </div>
 
-            {/* Contact Form */}
             <div>
               <h2 className="font-heading text-2xl font-bold text-navy mb-8">Send a Message</h2>
               <ContactForm primaryColor={primaryColor} />

@@ -1,7 +1,9 @@
-import { sanityClient } from '@/lib/sanity.client'
+'use client'
+
+import { use } from 'react'
+import { useSanity } from '@/hooks/useSanity'
 import { PROJECT_BY_SLUG_QUERY, SITE_SETTINGS_QUERY } from '@/lib/sanity.queries'
 import { urlFor } from '@/lib/sanity.image'
-import { notFound } from 'next/navigation'
 import Container from '@/components/ui/Container'
 import PageHero from '@/components/shared/PageHero'
 import { PortableText } from '@portabletext/react'
@@ -10,17 +12,16 @@ import { BsArrowsFullscreen } from 'react-icons/bs'
 import { FiClock } from 'react-icons/fi'
 import { MdOutlineAttachMoney } from 'react-icons/md'
 
-export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-  const project = await sanityClient.fetch(PROJECT_BY_SLUG_QUERY, { slug })
-  const siteSettings = await sanityClient.fetch(SITE_SETTINGS_QUERY)
+export default function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params)
+  const { data: project } = useSanity(PROJECT_BY_SLUG_QUERY, { slug })
+  const { data: siteSettings } = useSanity(SITE_SETTINGS_QUERY)
   const primaryColor = siteSettings?.primaryColor || '#E65100'
 
-  if (!project) notFound()
+  if (!project) return null
 
   return (
     <main>
-      {/* Hero with Breadcrumbs */}
       <PageHero
         title={project.title}
         breadcrumbs={[

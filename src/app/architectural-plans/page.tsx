@@ -1,4 +1,6 @@
-import { sanityClient } from '@/lib/sanity.client'
+'use client'
+
+import { useSanity } from '@/hooks/useSanity'
 import { PLANS_QUERY, SITE_SETTINGS_QUERY } from '@/lib/sanity.queries'
 import { urlFor } from '@/lib/sanity.image'
 import Link from 'next/link'
@@ -6,9 +8,9 @@ import Container from '@/components/ui/Container'
 import PageHero from '@/components/shared/PageHero'
 import { HiArrowRight } from 'react-icons/hi'
 
-export default async function ArchitecturalPlansPage() {
-  const plans = await sanityClient.fetch(PLANS_QUERY)
-  const siteSettings = await sanityClient.fetch(SITE_SETTINGS_QUERY)
+export default function ArchitecturalPlansPage() {
+  const { data: plans } = useSanity(PLANS_QUERY)
+  const { data: siteSettings } = useSanity(SITE_SETTINGS_QUERY)
   const primaryColor = siteSettings?.primaryColor || '#E65100'
 
   return (

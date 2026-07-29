@@ -1,12 +1,14 @@
-import { sanityClient } from '@/lib/sanity.client'
+'use client'
+
+import { useSanity } from '@/hooks/useSanity'
 import { GALLERY_PHOTOS_QUERY, GALLERY_VIDEOS_QUERY, SITE_SETTINGS_QUERY } from '@/lib/sanity.queries'
 import PageHero from '@/components/shared/PageHero'
 import GalleryContent from './GalleryContent'
 
-export default async function GalleryPage() {
-  const photos = await sanityClient.fetch(GALLERY_PHOTOS_QUERY)
-  const videos = await sanityClient.fetch(GALLERY_VIDEOS_QUERY)
-  const siteSettings = await sanityClient.fetch(SITE_SETTINGS_QUERY)
+export default function GalleryPage() {
+  const { data: photos } = useSanity(GALLERY_PHOTOS_QUERY)
+  const { data: videos } = useSanity(GALLERY_VIDEOS_QUERY)
+  const { data: siteSettings } = useSanity(SITE_SETTINGS_QUERY)
   const primaryColor = siteSettings?.primaryColor || '#E65100'
 
   return (
@@ -21,7 +23,7 @@ export default async function GalleryPage() {
         primaryColor={primaryColor}
       />
 
-      <GalleryContent photos={photos} videos={videos} primaryColor={primaryColor} />
+      <GalleryContent photos={photos || []} videos={videos || []} primaryColor={primaryColor} />
     </main>
   )
 }

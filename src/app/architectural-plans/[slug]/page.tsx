@@ -1,20 +1,22 @@
-import { sanityClient } from '@/lib/sanity.client'
+'use client'
+
+import { use } from 'react'
+import { useSanity } from '@/hooks/useSanity'
 import { PLAN_BY_SLUG_QUERY, SITE_SETTINGS_QUERY } from '@/lib/sanity.queries'
 import { urlFor } from '@/lib/sanity.image'
-import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Container from '@/components/ui/Container'
 import PageHero from '@/components/shared/PageHero'
 import { PortableText } from '@portabletext/react'
 import { BsDownload } from 'react-icons/bs'
 
-export default async function PlanDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-  const plan = await sanityClient.fetch(PLAN_BY_SLUG_QUERY, { slug })
-  const siteSettings = await sanityClient.fetch(SITE_SETTINGS_QUERY)
+export default function PlanDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params)
+  const { data: plan } = useSanity(PLAN_BY_SLUG_QUERY, { slug })
+  const { data: siteSettings } = useSanity(SITE_SETTINGS_QUERY)
   const primaryColor = siteSettings?.primaryColor || '#E65100'
 
-  if (!plan) notFound()
+  if (!plan) return null
 
   return (
     <main>
