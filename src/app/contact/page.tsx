@@ -8,11 +8,10 @@ import { HiOutlineMapPin } from 'react-icons/hi2'
 
 export default async function ContactPage() {
   const siteSettings = await sanityClient.fetch(SITE_SETTINGS_QUERY)
-  const primaryColor = siteSettings?.primaryColor || '#F59E0B'
+  const primaryColor = siteSettings?.primaryColor || '#E65100'
 
   return (
     <main>
-      {/* Hero with Breadcrumbs */}
       <PageHero
         title="Contact Us"
         subtitle="Have a project in mind? We'd love to hear from you. Reach out and let's start a conversation."
@@ -23,48 +22,47 @@ export default async function ContactPage() {
         primaryColor={primaryColor}
       />
 
-      {/* Contact Info + Form */}
-      <section className="pb-24 bg-[#0A0A0A]">
+      <section className="section-white pb-24">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Info */}
             <div>
-              <h2 className="text-2xl font-bold text-white mb-8">Contact Information</h2>
+              <h2 className="font-heading text-2xl font-bold text-navy mb-8">Contact Information</h2>
               <div className="space-y-6">
                 {siteSettings?.contactEmail && (
-                  <div className="flex items-start gap-4 p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${primaryColor}15`, color: primaryColor }}>
+                  <div className="flex items-start gap-4 p-6 rounded-2xl bg-gray-light border border-gray-200 hover:border-[var(--accent)]/30 transition-colors duration-300">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${primaryColor}12`, color: primaryColor }}>
                       <HiOutlineMail className="text-xl" />
                     </div>
                     <div>
-                      <p className="text-gray-400 text-sm mb-1">Email</p>
-                      <a href={`mailto:${siteSettings.contactEmail}`} className="text-white hover:text-amber-500 transition-colors">
+                      <p className="text-muted text-sm mb-1">Email</p>
+                      <a href={`mailto:${siteSettings.contactEmail}`} className="text-navy font-medium hover:text-[var(--accent)] transition-colors">
                         {siteSettings.contactEmail}
                       </a>
                     </div>
                   </div>
                 )}
                 {siteSettings?.contactPhone && (
-                  <div className="flex items-start gap-4 p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${primaryColor}15`, color: primaryColor }}>
+                  <div className="flex items-start gap-4 p-6 rounded-2xl bg-gray-light border border-gray-200 hover:border-[var(--accent)]/30 transition-colors duration-300">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${primaryColor}12`, color: primaryColor }}>
                       <HiOutlinePhone className="text-xl" />
                     </div>
                     <div>
-                      <p className="text-gray-400 text-sm mb-1">Phone</p>
-                      <a href={`tel:${siteSettings.contactPhone}`} className="text-white hover:text-amber-500 transition-colors">
+                      <p className="text-muted text-sm mb-1">Phone</p>
+                      <a href={`tel:${siteSettings.contactPhone.replace(/\D/g, '')}`} className="text-navy font-medium hover:text-[var(--accent)] transition-colors">
                         {siteSettings.contactPhone}
                       </a>
                     </div>
                   </div>
                 )}
                 {siteSettings?.contactAddress && (
-                  <div className="flex items-start gap-4 p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${primaryColor}15`, color: primaryColor }}>
+                  <div className="flex items-start gap-4 p-6 rounded-2xl bg-gray-light border border-gray-200 hover:border-[var(--accent)]/30 transition-colors duration-300">
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${primaryColor}12`, color: primaryColor }}>
                       <HiOutlineMapPin className="text-xl" />
                     </div>
                     <div>
-                      <p className="text-gray-400 text-sm mb-1">Address</p>
-                      <p className="text-white">{siteSettings.contactAddress}</p>
+                      <p className="text-muted text-sm mb-1">Address</p>
+                      <p className="text-navy font-medium">{siteSettings.contactAddress}</p>
                     </div>
                   </div>
                 )}
@@ -72,7 +70,7 @@ export default async function ContactPage() {
 
               {/* Google Map */}
               {siteSettings?.googleMapsUrl && (
-                <div className="mt-8 rounded-2xl overflow-hidden border border-white/5">
+                <div className="mt-8 rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
                   <iframe
                     src={siteSettings.googleMapsUrl}
                     width="100%"
@@ -88,7 +86,7 @@ export default async function ContactPage() {
 
             {/* Contact Form */}
             <div>
-              <h2 className="text-2xl font-bold text-white mb-8">Send a Message</h2>
+              <h2 className="font-heading text-2xl font-bold text-navy mb-8">Send a Message</h2>
               <ContactForm primaryColor={primaryColor} />
             </div>
           </div>

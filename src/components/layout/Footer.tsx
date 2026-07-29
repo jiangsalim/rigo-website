@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from 'react-icons/fa'
 import { HiOutlineMail, HiOutlinePhone } from 'react-icons/hi'
 import { HiOutlineMapPin } from 'react-icons/hi2'
+import { BsClock } from 'react-icons/bs'
 
 interface FooterProps {
   footerText: string
@@ -60,7 +61,7 @@ export default function Footer({
   const serviceLinks = services || defaultServices
 
   return (
-    <footer className="bg-[#0A0A0A] border-t border-white/5">
+    <footer className="bg-navy-dark border-t border-white/5">
       {/* Main Footer */}
       <div className="container-custom py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -69,60 +70,67 @@ export default function Footer({
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-4">
               {logoSrc ? (
-                <div className="relative w-10 h-10 flex-shrink-0 rounded-full overflow-hidden bg-white">
+                <div className="relative w-12 h-12 flex-shrink-0 rounded-full overflow-hidden bg-white shadow-lg">
                   <Image
                     src={logoSrc}
                     alt={siteTitle}
                     fill
-                    sizes="40px"
+                    sizes="48px"
                     className="object-contain p-1"
                   />
                 </div>
               ) : (
                 <div
-                  className="w-10 h-10 rounded-full flex items-center justify-center text-white font-heading font-bold flex-shrink-0"
-                  style={{ backgroundColor: primaryColor }}
+                  className="w-12 h-12 rounded-full flex items-center justify-center text-white font-heading font-bold text-lg flex-shrink-0 shadow-lg"
+                  style={{
+                    background: `linear-gradient(135deg, ${primaryColor}, #BF360C)`,
+                  }}
                 >
                   R
                 </div>
               )}
-              <span className="text-white font-heading font-bold text-sm leading-tight">
-                {siteTitle}
-              </span>
+              <div>
+                <span className="text-white font-heading font-bold text-sm leading-tight block">
+                  {siteTitle}
+                </span>
+                <p className="text-xs tracking-wider uppercase font-medium" style={{ color: primaryColor }}>
+                  Build The Future
+                </p>
+              </div>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
               Premium construction and architectural design services. Building the future, one project at a time.
             </p>
 
             {/* Social Links */}
-            <div className="flex gap-3">
+            <div className="flex gap-2">
               {socialLinks?.facebook && (
                 <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/10 transition-all duration-300">
+                  className="w-9 h-9 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300">
                   <FaFacebook size={14} />
                 </a>
               )}
               {socialLinks?.instagram && (
                 <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/10 transition-all duration-300">
+                  className="w-9 h-9 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300">
                   <FaInstagram size={14} />
                 </a>
               )}
               {socialLinks?.linkedin && (
                 <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/10 transition-all duration-300">
+                  className="w-9 h-9 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300">
                   <FaLinkedin size={14} />
                 </a>
               )}
               {socialLinks?.twitter && (
                 <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/10 transition-all duration-300">
+                  className="w-9 h-9 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300">
                   <FaTwitter size={14} />
                 </a>
               )}
               {socialLinks?.youtube && (
                 <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:border-white/20 hover:bg-white/10 transition-all duration-300">
+                  className="w-9 h-9 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300">
                   <FaYoutube size={14} />
                 </a>
               )}
@@ -133,8 +141,9 @@ export default function Footer({
           <div>
             <h4 className="text-white font-heading font-bold mb-6 text-sm uppercase tracking-wider">
               Quick Links
+              <span className="block w-8 h-0.5 mt-2 rounded-full" style={{ backgroundColor: primaryColor }} />
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-2.5">
               {links.map((item) => (
                 <li key={item.label}>
                   <Link
@@ -142,7 +151,7 @@ export default function Footer({
                     className="text-gray-400 hover:text-white transition-colors duration-300 text-sm flex items-center gap-2 group"
                   >
                     <span
-                      className="w-1.5 h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      className="w-1 h-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:w-1.5 group-hover:h-1.5"
                       style={{ backgroundColor: primaryColor }}
                     />
                     {item.label}
@@ -156,8 +165,9 @@ export default function Footer({
           <div>
             <h4 className="text-white font-heading font-bold mb-6 text-sm uppercase tracking-wider">
               Services
+              <span className="block w-8 h-0.5 mt-2 rounded-full" style={{ backgroundColor: primaryColor }} />
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-2.5">
               {serviceLinks.map((item) => (
                 <li key={item.label}>
                   <Link
@@ -165,7 +175,7 @@ export default function Footer({
                     className="text-gray-400 hover:text-white transition-colors duration-300 text-sm flex items-center gap-2 group"
                   >
                     <span
-                      className="w-1.5 h-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      className="w-1 h-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:w-1.5 group-hover:h-1.5"
                       style={{ backgroundColor: primaryColor }}
                     />
                     {item.label}
@@ -179,14 +189,14 @@ export default function Footer({
           <div>
             <h4 className="text-white font-heading font-bold mb-6 text-sm uppercase tracking-wider">
               Contact Us
+              <span className="block w-8 h-0.5 mt-2 rounded-full" style={{ backgroundColor: primaryColor }} />
             </h4>
             <ul className="space-y-4">
               {contactAddress && (
-                <li className="flex items-start gap-3 text-sm text-gray-400">
-                  <HiOutlineMapPin
-                    className="text-lg flex-shrink-0 mt-0.5"
-                    style={{ color: primaryColor }}
-                  />
+                <li className="flex items-start gap-3 text-sm text-gray-400 group hover:text-white transition-colors duration-300">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: `${primaryColor}15` }}>
+                    <HiOutlineMapPin className="text-sm" style={{ color: primaryColor }} />
+                  </div>
                   <span>{contactAddress}</span>
                 </li>
               )}
@@ -194,12 +204,11 @@ export default function Footer({
                 <li>
                   <a
                     href={`mailto:${contactEmail}`}
-                    className="flex items-center gap-3 text-sm text-gray-400 hover:text-white transition-colors duration-300"
+                    className="flex items-center gap-3 text-sm text-gray-400 hover:text-white transition-colors duration-300 group"
                   >
-                    <HiOutlineMail
-                      className="text-lg flex-shrink-0"
-                      style={{ color: primaryColor }}
-                    />
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${primaryColor}15` }}>
+                      <HiOutlineMail className="text-sm" style={{ color: primaryColor }} />
+                    </div>
                     <span>{contactEmail}</span>
                   </a>
                 </li>
@@ -208,16 +217,21 @@ export default function Footer({
                 <li>
                   <a
                     href={`tel:${contactPhone.replace(/\D/g, '')}`}
-                    className="flex items-center gap-3 text-sm text-gray-400 hover:text-white transition-colors duration-300"
+                    className="flex items-center gap-3 text-sm text-gray-400 hover:text-white transition-colors duration-300 group"
                   >
-                    <HiOutlinePhone
-                      className="text-lg flex-shrink-0"
-                      style={{ color: primaryColor }}
-                    />
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${primaryColor}15` }}>
+                      <HiOutlinePhone className="text-sm" style={{ color: primaryColor }} />
+                    </div>
                     <span>{contactPhone}</span>
                   </a>
                 </li>
               )}
+              <li className="flex items-start gap-3 text-sm text-gray-400 group hover:text-white transition-colors duration-300">
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5" style={{ backgroundColor: `${primaryColor}15` }}>
+                  <BsClock className="text-sm" style={{ color: primaryColor }} />
+                </div>
+                <span>Monday–Friday, 8:00 AM – 5:00 PM EAT</span>
+              </li>
             </ul>
           </div>
         </div>
@@ -226,8 +240,8 @@ export default function Footer({
       {/* Bottom Bar */}
       <div className="border-t border-white/5">
         <div className="container-custom py-6">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-gray-500 text-sm text-center sm:text-left">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-gray-500 text-sm text-center md:text-left">
               {footerText?.replace('{year}', currentYear.toString()) || `© ${currentYear} ${siteTitle}. All rights reserved.`}
             </p>
             <div className="flex items-center gap-4">
@@ -243,7 +257,7 @@ export default function Footer({
                 Sitemap
               </Link>
             </div>
-            <p className="text-gray-500 text-sm text-center sm:text-right">
+            <p className="text-gray-500 text-sm text-center md:text-right">
               Powered by{' '}
               <a
                 href="https://herman-software-website.vercel.app/"

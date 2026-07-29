@@ -34,10 +34,15 @@ export default function HeroSection({
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"])
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
 
+  // Split headline to highlight last word
+  const headlineWords = headline.split(' ')
+  const lastWord = headlineWords.pop()
+  const firstPart = headlineWords.join(' ')
+
   return (
     <section
       ref={ref}
-      className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden bg-[#0A0A0A]"
+      className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden bg-navy"
     >
       {/* Background Image with Parallax */}
       {backgroundImage && (
@@ -45,21 +50,23 @@ export default function HeroSection({
           <img
             src={backgroundImage}
             alt=""
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover opacity-50"
           />
-          <div className="absolute inset-0 hero-gradient" />
+          <div className="absolute inset-0 bg-gradient-to-b from-navy/60 via-navy/40 to-navy" />
         </motion.div>
       )}
 
       {/* Grid Pattern Overlay */}
-      {!backgroundImage && (
-        <div className="absolute inset-0 z-0 opacity-[0.03]"
-          style={{
-            backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        />
-      )}
+      <div className="absolute inset-0 z-0 opacity-[0.03]"
+        style={{
+          backgroundImage: "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
+      />
+
+      {/* Decorative Glow Blobs */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[120px] opacity-10" style={{ backgroundColor: primaryColor }} />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-[100px] opacity-5" style={{ backgroundColor: primaryColor }} />
 
       {/* Hero Content */}
       <motion.div
@@ -71,9 +78,9 @@ export default function HeroSection({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.8 }}
-          className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-6"
+          className="inline-flex items-center gap-2 rounded-full px-5 py-2 mb-8"
           style={{
-            backgroundColor: `${primaryColor}15`,
+            backgroundColor: `${primaryColor}12`,
             border: `1px solid ${primaryColor}30`,
           }}
         >
@@ -82,10 +89,10 @@ export default function HeroSection({
             style={{ backgroundColor: primaryColor }}
           />
           <span
-            className="text-sm font-medium tracking-wide"
+            className="text-sm font-semibold tracking-wide uppercase"
             style={{ color: primaryColor }}
           >
-            RIGO DESIGN & CONSTRUCTION Co. LTD
+            {subheadline}
           </span>
         </motion.div>
 
@@ -94,11 +101,15 @@ export default function HeroSection({
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
-          className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-white"
+          className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-[1.08] text-white"
         >
-          {headline.split(' ').slice(0, -1).join(' ')}{' '}
-          <span className="text-gradient">
-            {headline.split(' ').slice(-1)}
+          {firstPart}{' '}
+          <span className="text-gradient" style={{
+            background: `linear-gradient(135deg, ${primaryColor}, #FF8A50)`,
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+          }}>
+            {lastWord}
           </span>
         </motion.h1>
 
@@ -107,9 +118,9 @@ export default function HeroSection({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
-          className="text-gray-medium text-lg sm:text-xl max-w-2xl mx-auto mb-10"
+          className="text-white/60 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          {subheadline}
+          Premium construction and architectural design services. From concept to completion, we bring your vision to life.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -125,10 +136,10 @@ export default function HeroSection({
               href={btn.href}
               className={
                 btn.variant === 'primary'
-                  ? 'btn-primary text-lg'
+                  ? 'btn-primary text-base px-10 py-4'
                   : btn.variant === 'secondary'
-                  ? 'btn-secondary text-lg dark:border-white/20 dark:text-white dark:hover:bg-white dark:hover:text-gray-900'
-                  : 'btn-outline-light text-lg'
+                  ? 'btn-secondary text-base px-10 py-4 border-white/30 text-white hover:bg-white hover:text-navy'
+                  : 'btn-outline-light text-base px-10 py-4'
               }
             >
               {btn.label}
@@ -136,39 +147,14 @@ export default function HeroSection({
           ))}
           {!ctaButtons && (
             <>
-              <Link href="/projects" className="btn-primary text-lg">
+              <Link href="/projects" className="btn-primary text-base px-10 py-4">
                 View Our Work
               </Link>
-              <Link href="/contact" className="btn-outline-light text-lg">
+              <Link href="/contact" className="btn-outline-light text-base px-10 py-4">
                 Get In Touch
               </Link>
             </>
           )}
-        </motion.div>
-
-        {/* Stats Row */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.8 }}
-          className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 mt-16 pt-12 border-t border-white/10"
-        >
-          {[
-            { value: '50+', label: 'Projects Delivered' },
-            { value: '6+', label: 'Years Experience' },
-            { value: '30+', label: 'Clients Served' },
-            { value: '5', label: 'Countries Reached' },
-          ].map((stat, index) => (
-            <div key={index} className="text-center">
-              <div
-                className="text-2xl sm:text-3xl font-heading font-bold"
-                style={{ color: primaryColor }}
-              >
-                {stat.value}
-              </div>
-              <div className="text-sm text-gray-medium mt-1">{stat.label}</div>
-            </div>
-          ))}
         </motion.div>
 
         {/* Scroll Indicator */}
@@ -181,10 +167,10 @@ export default function HeroSection({
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-6 h-10 border-2 border-white/20 rounded-full flex items-start justify-center p-1"
+            className="w-7 h-11 border-2 border-white/20 rounded-full flex items-start justify-center p-2"
           >
             <motion.div
-              className="w-1.5 h-1.5 rounded-full"
+              className="w-1.5 h-3 rounded-full"
               style={{ backgroundColor: primaryColor }}
             />
           </motion.div>

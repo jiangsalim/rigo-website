@@ -220,3 +220,32 @@ export const TEAM_MEMBERS_QUERY = groq`
     bio
   }
 `
+
+// Gallery
+export const GALLERY_PHOTOS_QUERY = groq`
+  *[_type == "galleryItem" && type == "photo"] | order(order asc) {
+    title,
+    image,
+    category,
+    featured
+  }
+`
+
+export const GALLERY_VIDEOS_QUERY = groq`
+  *[_type == "galleryItem" && type == "video"] | order(order asc) {
+    title,
+    videoUrl,
+    category,
+    featured
+  }
+`
+
+export const FEATURED_GALLERY_QUERY = groq`
+  *[_type == "galleryItem" && featured == true] | order(order asc) [0...6] {
+    title,
+    type,
+    image,
+    videoUrl,
+    category
+  }
+`

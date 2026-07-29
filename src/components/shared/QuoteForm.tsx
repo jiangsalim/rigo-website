@@ -4,12 +4,14 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { HiOutlineMail, HiOutlinePhone, HiOutlineUser, HiOutlineLocationMarker } from 'react-icons/hi'
 import { FiSend } from 'react-icons/fi'
+import { BsBuildings, BsClock } from 'react-icons/bs'
+import { MdAttachMoney } from 'react-icons/md'
 
 interface QuoteFormProps {
   primaryColor?: string
 }
 
-export default function QuoteForm({ primaryColor = '#F59E0B' }: QuoteFormProps) {
+export default function QuoteForm({ primaryColor = '#E65100' }: QuoteFormProps) {
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState({
     name: '',
@@ -61,94 +63,220 @@ export default function QuoteForm({ primaryColor = '#F59E0B' }: QuoteFormProps) 
   const nextStep = () => setStep(step + 1)
   const prevStep = () => setStep(step - 1)
 
+  const stepLabels = ['Personal Info', 'Project Details', 'Review & Submit']
+
   return (
     <form onSubmit={handleSubmit}>
       {/* Step Indicator */}
-      <div className="flex items-center gap-2 mb-10">
-        {[1, 2, 3].map((s) => (
-          <div key={s} className="flex items-center gap-2 flex-1">
-            <div
-              className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all ${
-                s <= step ? 'text-black' : 'bg-white/[0.03] border border-white/10 text-gray-500'
-              }`}
-              style={s <= step ? { backgroundColor: primaryColor } : {}}
-            >
-              {s < step ? '✓' : s}
+      <div className="mb-10">
+        <div className="flex items-center gap-2 mb-4">
+          {[1, 2, 3].map((s) => (
+            <div key={s} className="flex items-center gap-2 flex-1">
+              <motion.div
+                animate={{
+                  scale: s === step ? 1.1 : 1,
+                  backgroundColor: s <= step ? primaryColor : 'transparent',
+                }}
+                className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all border-2 ${
+                  s <= step
+                    ? 'text-white border-transparent'
+                    : 'text-gray-400 border-gray-200 bg-white'
+                }`}
+                style={s <= step ? { borderColor: primaryColor } : {}}
+              >
+                {s < step ? (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </svg>
+                ) : (
+                  s
+                )}
+              </motion.div>
+              {s < 3 && (
+                <div
+                  className={`flex-1 h-1 rounded-full transition-all duration-500 ${
+                    s < step ? 'bg-[var(--accent)]' : 'bg-gray-200'
+                  }`}
+                  style={s < step ? { backgroundColor: primaryColor } : {}}
+                />
+              )}
             </div>
-            {s < 3 && <div className={`flex-1 h-px ${s < step ? 'bg-amber-500' : 'bg-white/10'}`} />}
-          </div>
-        ))}
+          ))}
+        </div>
+        <p className="text-center text-sm font-medium text-navy">
+          Step {step}: {stepLabels[step - 1]}
+        </p>
       </div>
 
       {/* Step 1: Personal Info */}
       {step === 1 && (
-        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-5">
-          <h3 className="text-lg font-semibold text-white mb-4">Personal Information</h3>
-          <div className="relative">
-            <HiOutlineUser className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
-            <input type="text" name="name" placeholder="Full Name *" value={formData.name} onChange={handleChange} required className="w-full pl-12 pr-4 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-amber-500/50 transition-colors" />
+        <motion.div
+          key="step1"
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -30 }}
+          className="space-y-5"
+        >
+          <h3 className="font-heading text-xl font-bold text-navy mb-2">Personal Information</h3>
+          <p className="text-charcoal text-sm -mt-2 mb-4">Tell us how to reach you.</p>
+
+          <div className="relative group">
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${primaryColor}10` }}>
+              <HiOutlineUser className="text-sm" style={{ color: primaryColor }} />
+            </div>
+            <input type="text" name="name" placeholder="Full Name *" value={formData.name} onChange={handleChange} required
+              className="w-full pl-14 pr-4 py-4 bg-white border border-gray-200 rounded-xl text-navy placeholder-gray-400 focus:outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/10 transition-all duration-300" />
           </div>
-          <div className="relative">
-            <HiOutlineMail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
-            <input type="email" name="email" placeholder="Email Address *" value={formData.email} onChange={handleChange} required className="w-full pl-12 pr-4 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-amber-500/50 transition-colors" />
+          <div className="relative group">
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${primaryColor}10` }}>
+              <HiOutlineMail className="text-sm" style={{ color: primaryColor }} />
+            </div>
+            <input type="email" name="email" placeholder="Email Address *" value={formData.email} onChange={handleChange} required
+              className="w-full pl-14 pr-4 py-4 bg-white border border-gray-200 rounded-xl text-navy placeholder-gray-400 focus:outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/10 transition-all duration-300" />
           </div>
-          <div className="relative">
-            <HiOutlinePhone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
-            <input type="tel" name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} className="w-full pl-12 pr-4 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-amber-500/50 transition-colors" />
+          <div className="relative group">
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${primaryColor}10` }}>
+              <HiOutlinePhone className="text-sm" style={{ color: primaryColor }} />
+            </div>
+            <input type="tel" name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange}
+              className="w-full pl-14 pr-4 py-4 bg-white border border-gray-200 rounded-xl text-navy placeholder-gray-400 focus:outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/10 transition-all duration-300" />
           </div>
-          <button type="button" onClick={nextStep} className="w-full py-4 rounded-xl font-medium text-sm transition-all duration-300 hover:scale-[1.02] text-black" style={{ backgroundColor: primaryColor }}>
-            Next Step →
-          </button>
+          <motion.button type="button" onClick={nextStep} whileHover={{ scale: 1.02, y: -2 }} whileTap={{ scale: 0.98 }}
+            className="btn-primary w-full flex items-center justify-center gap-2 py-4 text-sm">
+            Continue to Project Details →
+          </motion.button>
         </motion.div>
       )}
 
       {/* Step 2: Project Details */}
       {step === 2 && (
-        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-5">
-          <h3 className="text-lg font-semibold text-white mb-4">Project Details</h3>
-          <select name="service" value={formData.service} onChange={handleChange} className="w-full px-4 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white focus:outline-none focus:border-amber-500/50 transition-colors">
-            <option value="" className="bg-[#1A1A1A]">Select Service</option>
-            <option value="Residential Construction" className="bg-[#1A1A1A]">Residential Construction</option>
-            <option value="Commercial Construction" className="bg-[#1A1A1A]">Commercial Construction</option>
-            <option value="Design & Build" className="bg-[#1A1A1A]">Design & Build</option>
-            <option value="Architectural Plans" className="bg-[#1A1A1A]">Architectural Plans</option>
-            <option value="Renovation" className="bg-[#1A1A1A]">Renovation</option>
-            <option value="Interior Design" className="bg-[#1A1A1A]">Interior Design</option>
-            <option value="Other" className="bg-[#1A1A1A]">Other</option>
-          </select>
-          <div className="relative">
-            <HiOutlineLocationMarker className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
-            <input type="text" name="location" placeholder="Project Location" value={formData.location} onChange={handleChange} className="w-full pl-12 pr-4 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-amber-500/50 transition-colors" />
+        <motion.div
+          key="step2"
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -30 }}
+          className="space-y-5"
+        >
+          <h3 className="font-heading text-xl font-bold text-navy mb-2">Project Details</h3>
+          <p className="text-charcoal text-sm -mt-2 mb-4">Help us understand your project.</p>
+
+          <div className="relative group">
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${primaryColor}10` }}>
+              <BsBuildings className="text-sm" style={{ color: primaryColor }} />
+            </div>
+            <select name="service" value={formData.service} onChange={handleChange}
+              className="w-full pl-14 pr-4 py-4 bg-white border border-gray-200 rounded-xl text-navy focus:outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/10 transition-all duration-300 appearance-none cursor-pointer">
+              <option value="">Select Service</option>
+              <option value="Residential Construction">Residential Construction</option>
+              <option value="Commercial Construction">Commercial Construction</option>
+              <option value="Design & Build">Design & Build</option>
+              <option value="Architectural Plans">Architectural Plans</option>
+              <option value="Renovation">Renovation</option>
+              <option value="Interior Design">Interior Design</option>
+              <option value="Other">Other</option>
+            </select>
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
           </div>
-          <select name="budget" value={formData.budget} onChange={handleChange} className="w-full px-4 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white focus:outline-none focus:border-amber-500/50 transition-colors">
-            <option value="" className="bg-[#1A1A1A]">Budget Range (Optional)</option>
-            <option value="Under $10,000" className="bg-[#1A1A1A]">Under $10,000</option>
-            <option value="$10,000 - $50,000" className="bg-[#1A1A1A]">$10,000 - $50,000</option>
-            <option value="$50,000 - $100,000" className="bg-[#1A1A1A]">$50,000 - $100,000</option>
-            <option value="$100,000+" className="bg-[#1A1A1A]">$100,000+</option>
-          </select>
-          <select name="timeline" value={formData.timeline} onChange={handleChange} className="w-full px-4 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white focus:outline-none focus:border-amber-500/50 transition-colors">
-            <option value="" className="bg-[#1A1A1A]">Timeline (Optional)</option>
-            <option value="1-3 months" className="bg-[#1A1A1A]">1-3 months</option>
-            <option value="3-6 months" className="bg-[#1A1A1A]">3-6 months</option>
-            <option value="6-12 months" className="bg-[#1A1A1A]">6-12 months</option>
-            <option value="12+ months" className="bg-[#1A1A1A]">12+ months</option>
-          </select>
-          <div className="flex gap-3">
-            <button type="button" onClick={prevStep} className="flex-1 py-4 rounded-xl font-medium text-sm border border-white/10 text-white hover:bg-white/10 transition-all">← Back</button>
-            <button type="button" onClick={nextStep} className="flex-1 py-4 rounded-xl font-medium text-sm transition-all duration-300 hover:scale-[1.02] text-black" style={{ backgroundColor: primaryColor }}>Next Step →</button>
+          <div className="relative group">
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${primaryColor}10` }}>
+              <HiOutlineLocationMarker className="text-sm" style={{ color: primaryColor }} />
+            </div>
+            <input type="text" name="location" placeholder="Project Location" value={formData.location} onChange={handleChange}
+              className="w-full pl-14 pr-4 py-4 bg-white border border-gray-200 rounded-xl text-navy placeholder-gray-400 focus:outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/10 transition-all duration-300" />
+          </div>
+          <div className="relative group">
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${primaryColor}10` }}>
+              <MdAttachMoney className="text-sm" style={{ color: primaryColor }} />
+            </div>
+            <select name="budget" value={formData.budget} onChange={handleChange}
+              className="w-full pl-14 pr-4 py-4 bg-white border border-gray-200 rounded-xl text-navy focus:outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/10 transition-all duration-300 appearance-none cursor-pointer">
+              <option value="">Budget Range (Optional)</option>
+              <option value="Under $10,000">Under $10,000</option>
+              <option value="$10,000 - $50,000">$10,000 - $50,000</option>
+              <option value="$50,000 - $100,000">$50,000 - $100,000</option>
+              <option value="$100,000+">$100,000+</option>
+            </select>
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+          <div className="relative group">
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${primaryColor}10` }}>
+              <BsClock className="text-sm" style={{ color: primaryColor }} />
+            </div>
+            <select name="timeline" value={formData.timeline} onChange={handleChange}
+              className="w-full pl-14 pr-4 py-4 bg-white border border-gray-200 rounded-xl text-navy focus:outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/10 transition-all duration-300 appearance-none cursor-pointer">
+              <option value="">Timeline (Optional)</option>
+              <option value="1-3 months">1-3 months</option>
+              <option value="3-6 months">3-6 months</option>
+              <option value="6-12 months">6-12 months</option>
+              <option value="12+ months">12+ months</option>
+            </select>
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+              <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+          <div className="flex gap-3 pt-2">
+            <button type="button" onClick={prevStep}
+              className="flex-1 py-4 rounded-xl font-medium text-sm border-2 border-gray-200 text-navy hover:bg-gray-50 transition-all duration-300">
+              ← Back
+            </button>
+            <motion.button type="button" onClick={nextStep} whileHover={{ scale: 1.02, y: -2 }} whileTap={{ scale: 0.98 }}
+              className="btn-primary flex-1 flex items-center justify-center gap-2 py-4 text-sm">
+              Continue to Review →
+            </motion.button>
           </div>
         </motion.div>
       )}
 
-      {/* Step 3: Message & Submit */}
+      {/* Step 3: Review & Submit */}
       {step === 3 && (
-        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-5">
-          <h3 className="text-lg font-semibold text-white mb-4">Additional Details</h3>
-          <textarea name="message" placeholder="Describe your project, requirements, or any questions..." value={formData.message} onChange={handleChange} rows={5} className="w-full px-4 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-amber-500/50 transition-colors resize-none" />
-          <div className="flex gap-3">
-            <button type="button" onClick={prevStep} className="flex-1 py-4 rounded-xl font-medium text-sm border border-white/10 text-white hover:bg-white/10 transition-all">← Back</button>
-            <button type="submit" disabled={status === 'loading'} className="flex-1 py-4 rounded-xl font-medium text-sm transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2 text-black" style={{ backgroundColor: primaryColor }}>
+        <motion.div
+          key="step3"
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -30 }}
+          className="space-y-5"
+        >
+          <h3 className="font-heading text-xl font-bold text-navy mb-2">Additional Details</h3>
+          <p className="text-charcoal text-sm -mt-2 mb-4">Any final details about your project?</p>
+
+          <div className="relative group">
+            <div className="absolute left-4 top-4 w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${primaryColor}10` }}>
+              <svg className="w-3.5 h-3.5" style={{ color: primaryColor }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+              </svg>
+            </div>
+            <textarea name="message" placeholder="Describe your project, requirements, or any questions..." value={formData.message} onChange={handleChange} rows={5}
+              className="w-full pl-14 pr-4 py-4 bg-white border border-gray-200 rounded-xl text-navy placeholder-gray-400 focus:outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/10 transition-all duration-300 resize-none" />
+          </div>
+
+          {/* Summary Card */}
+          <div className="bg-gray-light rounded-xl p-5 space-y-2 text-sm">
+            <h4 className="font-semibold text-navy mb-2">Request Summary</h4>
+            {formData.name && <p className="text-charcoal"><span className="font-medium text-navy">Name:</span> {formData.name}</p>}
+            {formData.email && <p className="text-charcoal"><span className="font-medium text-navy">Email:</span> {formData.email}</p>}
+            {formData.service && <p className="text-charcoal"><span className="font-medium text-navy">Service:</span> {formData.service}</p>}
+            {formData.location && <p className="text-charcoal"><span className="font-medium text-navy">Location:</span> {formData.location}</p>}
+            {formData.budget && <p className="text-charcoal"><span className="font-medium text-navy">Budget:</span> {formData.budget}</p>}
+            {formData.timeline && <p className="text-charcoal"><span className="font-medium text-navy">Timeline:</span> {formData.timeline}</p>}
+          </div>
+
+          <div className="flex gap-3 pt-2">
+            <button type="button" onClick={prevStep}
+              className="flex-1 py-4 rounded-xl font-medium text-sm border-2 border-gray-200 text-navy hover:bg-gray-50 transition-all duration-300">
+              ← Back
+            </button>
+            <motion.button type="submit" disabled={status === 'loading'} whileHover={{ scale: 1.02, y: -2 }} whileTap={{ scale: 0.98 }}
+              className="btn-primary flex-1 flex items-center justify-center gap-2 py-4 text-sm disabled:opacity-50">
               {status === 'loading' ? (
                 <span className="flex items-center gap-2">
                   <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
@@ -162,13 +290,21 @@ export default function QuoteForm({ primaryColor = '#F59E0B' }: QuoteFormProps) 
                   <FiSend /> Submit Request
                 </>
               )}
-            </button>
+            </motion.button>
           </div>
+
+          {/* Status Messages */}
           {status === 'success' && (
-            <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-green-400 text-sm text-center">Quote request sent! We'll get back to you soon.</motion.p>
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+              className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl text-sm text-center font-medium">
+              ✅ Quote request sent! We'll get back to you within 48 hours.
+            </motion.div>
           )}
           {status === 'error' && (
-            <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-red-400 text-sm text-center">{errorMessage}</motion.p>
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+              className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm text-center font-medium">
+              ❌ {errorMessage}
+            </motion.div>
           )}
         </motion.div>
       )}
