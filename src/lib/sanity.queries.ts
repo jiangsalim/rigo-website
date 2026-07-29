@@ -234,7 +234,12 @@ export const GALLERY_PHOTOS_QUERY = groq`
 export const GALLERY_VIDEOS_QUERY = groq`
   *[_type == "galleryItem" && type == "video"] | order(order asc) {
     title,
+    videoSource,
+    videoFile {
+      asset->
+    },
     videoUrl,
+    thumbnail,
     category,
     featured
   }
@@ -245,7 +250,12 @@ export const FEATURED_GALLERY_QUERY = groq`
     title,
     type,
     image,
+    videoSource,
+    videoFile {
+      asset->
+    },
     videoUrl,
+    thumbnail,
     category
   }
 `
