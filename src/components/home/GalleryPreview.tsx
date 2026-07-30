@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Container from '@/components/ui/Container'
 import SectionHeading from '@/components/shared/SectionHeading'
 import { urlFor } from '@/lib/sanity.image'
-import { HiArrowRight, HiPlay } from 'react-icons/hi'
+import { HiPlay } from 'react-icons/hi'
 
 interface GalleryItem {
   title: string
@@ -24,19 +24,19 @@ export default function GalleryPreview({ items = [], primaryColor = '#E65100' }:
   if (!items.length) return null
 
   return (
-    <section className="section-white py-16 md:py-20">
+    <section className="py-16 md:py-20">
       <Container>
-        <div className="flex flex-col sm:flex-row items-end justify-between mb-12">
-          <div className="flex-1">
-            <SectionHeading
-              heading="Our Gallery"
-              subheading="See Our Work"
-              accentColor={primaryColor}
-            />
-          </div>
+        {/* Centered heading + button on all screens */}
+        <div className="flex flex-col items-center text-center mb-12">
+          <SectionHeading
+            heading="Our Gallery"
+            subheading="See Our Work"
+            accentColor={primaryColor}
+            align="center"
+          />
           <Link
             href="/gallery"
-            className="btn-secondary text-sm whitespace-nowrap mb-6 sm:mb-0 border-navy text-navy hover:bg-navy hover:text-white"
+            className="btn-secondary text-sm mt-2 border-navy text-navy hover:bg-navy hover:text-white"
           >
             View Full Gallery →
           </Link>
@@ -62,8 +62,8 @@ export default function GalleryPreview({ items = [], primaryColor = '#E65100' }:
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
                 ) : (
-                  <div className="w-full h-full bg-gray-light flex items-center justify-center">
-                    <HiPlay className="text-4xl text-white" style={{ color: primaryColor }} />
+                  <div className="w-full h-full flex items-center justify-center" style={{ backgroundColor: 'var(--bg-badge)' }}>
+                    <HiPlay className="text-4xl" style={{ color: primaryColor }} />
                   </div>
                 )}
                 {/* Overlay */}
