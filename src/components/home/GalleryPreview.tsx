@@ -36,7 +36,7 @@ export default function GalleryPreview({ items = [], primaryColor = '#E65100' }:
           />
           <Link
             href="/gallery"
-            className="btn-secondary text-sm mt-2 border-navy text-navy hover:bg-navy hover:text-white"
+            className="btn-secondary text-sm mt-2"
           >
             View Full Gallery →
           </Link>
