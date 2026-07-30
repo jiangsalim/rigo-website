@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { urlFor } from '@/lib/sanity.image'
 import { FaBuilding, FaClock, FaSmile, FaUsers, FaLinkedin, FaTwitter } from 'react-icons/fa'
 import { BsDownload } from 'react-icons/bs'
+import CertificateBadge from '@/components/shared/CertificateBadge'
 
 /* ========== CountUp Subcomponent ========== */
 function CountUp({ target, suffix, isInView }: { target: number; suffix: string; isInView: boolean }) {
@@ -138,6 +139,20 @@ export default function AboutPageContent({ teamMembers, siteSettings }: AboutPag
                 ideas into landmark structures that inspire communities.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust & Compliance — Certificate */}
+      <section className="section-white pb-20">
+        <div className="container-custom">
+          <div className="max-w-md mx-auto">
+            <CertificateBadge
+              certificate={siteSettings?.certificate}
+              tinNumber={siteSettings?.tinNumber}
+              registrationNumber={siteSettings?.registrationNumber}
+              primaryColor={primaryColor}
+            />
           </div>
         </div>
       </section>

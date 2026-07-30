@@ -4,6 +4,7 @@ import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from 'react
 import { HiOutlineMail, HiOutlinePhone } from 'react-icons/hi'
 import { HiOutlineMapPin } from 'react-icons/hi2'
 import { BsClock } from 'react-icons/bs'
+import CertificateBadge from '@/components/shared/CertificateBadge'
 
 interface FooterProps {
   footerText: string
@@ -22,6 +23,9 @@ interface FooterProps {
   primaryColor?: string
   quickLinks?: { label: string; href: string }[]
   services?: { label: string; href: string }[]
+  certificate?: { asset?: { url?: string } } | null
+  tinNumber?: string
+  registrationNumber?: string
 }
 
 export default function Footer({
@@ -35,6 +39,9 @@ export default function Footer({
   primaryColor = '#E65100',
   quickLinks,
   services,
+  certificate,
+  tinNumber,
+  registrationNumber,
 }: FooterProps) {
   const currentYear = new Date().getFullYear()
   const logoSrc = logo?.asset?.url || null
@@ -98,9 +105,21 @@ export default function Footer({
                 </p>
               </div>
             </Link>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+            <p className="text-gray-400 text-sm leading-relaxed mb-4">
               Premium construction and architectural design services. Build the future, one project at a time.
             </p>
+
+            {/* Certificate Badge */}
+            {certificate?.asset?.url && (
+              <div className="mb-4">
+                <CertificateBadge
+                  certificate={certificate}
+                  tinNumber={tinNumber}
+                  registrationNumber={registrationNumber}
+                  primaryColor={primaryColor}
+                />
+              </div>
+            )}
 
             {/* Social Links */}
             <div className="flex gap-2">

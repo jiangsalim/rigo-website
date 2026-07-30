@@ -31,7 +31,15 @@ export const SITE_SETTINGS_QUERY = groq`
     contactAddress,
     googleMapsUrl,
     socialLinks,
-    footerText
+    footerText,
+    certificate {
+      asset->{
+        _id,
+        url
+      }
+    },
+    tinNumber,
+    registrationNumber
   }
 `
 
@@ -62,28 +70,23 @@ export const HOME_PAGE_QUERY = groq`
           variant
         }
       },
-      // Stats counter
       _type == 'statsCounter' => {
         stats[] {
           number,
           label
         }
       },
-      // Services overview
       _type == 'servicesOverview' => {
         heading,
         subheading
       },
-      // Featured projects
       _type == 'featuredProjects' => {
         heading,
         subheading
       },
-      // Testimonials
       _type == 'testimonialsCarousel' => {
         heading
       },
-      // CTA Banner
       _type == 'ctaBanner' => {
         heading,
         text,
