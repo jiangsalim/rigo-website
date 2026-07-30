@@ -1,13 +1,15 @@
+'use client'
+
 import Link from 'next/link'
-import { sanityClient } from '@/lib/sanity.client'
+import { useSanity } from '@/hooks/useSanity'
 import { SITE_SETTINGS_QUERY, NAVIGATION_QUERY } from '@/lib/sanity.queries'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Container from '@/components/ui/Container'
 
-export default async function NotFound() {
-  const siteSettings = await sanityClient.fetch(SITE_SETTINGS_QUERY)
-  const navigation = await sanityClient.fetch(NAVIGATION_QUERY)
+export default function NotFound() {
+  const { data: siteSettings } = useSanity(SITE_SETTINGS_QUERY)
+  const { data: navigation } = useSanity(NAVIGATION_QUERY)
   const primaryColor = siteSettings?.primaryColor || '#E65100'
 
   return (
