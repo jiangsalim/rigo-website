@@ -28,49 +28,52 @@ export default function ContactPage() {
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
-              <h2 className="font-heading text-2xl font-bold text-navy mb-8">Contact Information</h2>
+              <h2 className="font-heading text-2xl font-bold mb-8" style={{ color: 'var(--text-heading)' }}>Contact Information</h2>
               <div className="space-y-6">
                 {siteSettings?.contactEmail && (
-                  <div className="flex items-start gap-4 p-6 rounded-2xl bg-gray-light border border-gray-200 hover:border-[var(--accent)]/30 transition-colors duration-300">
+                  <div className="flex items-start gap-4 p-6 rounded-2xl border transition-colors duration-300"
+                    style={{ backgroundColor: 'var(--bg-badge)', borderColor: 'var(--card-border)' }}>
                     <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${primaryColor}12`, color: primaryColor }}>
                       <HiOutlineMail className="text-xl" />
                     </div>
                     <div>
-                      <p className="text-muted text-sm mb-1">Email</p>
-                      <a href={`mailto:${siteSettings.contactEmail}`} className="text-navy font-medium hover:text-[var(--accent)] transition-colors">
+                      <p className="text-sm mb-1" style={{ color: 'var(--text-muted)' }}>Email</p>
+                      <a href={`mailto:${siteSettings.contactEmail}`} className="font-medium transition-colors" style={{ color: 'var(--text-heading)' }}>
                         {siteSettings.contactEmail}
                       </a>
                     </div>
                   </div>
                 )}
                 {siteSettings?.contactPhone && (
-                  <div className="flex items-start gap-4 p-6 rounded-2xl bg-gray-light border border-gray-200 hover:border-[var(--accent)]/30 transition-colors duration-300">
+                  <div className="flex items-start gap-4 p-6 rounded-2xl border transition-colors duration-300"
+                    style={{ backgroundColor: 'var(--bg-badge)', borderColor: 'var(--card-border)' }}>
                     <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${primaryColor}12`, color: primaryColor }}>
                       <HiOutlinePhone className="text-xl" />
                     </div>
                     <div>
-                      <p className="text-muted text-sm mb-1">Phone</p>
-                      <a href={`tel:${siteSettings.contactPhone?.replace(/\D/g, '')}`} className="text-navy font-medium hover:text-[var(--accent)] transition-colors">
+                      <p className="text-sm mb-1" style={{ color: 'var(--text-muted)' }}>Phone</p>
+                      <a href={`tel:${siteSettings.contactPhone?.replace(/\D/g, '')}`} className="font-medium transition-colors" style={{ color: 'var(--text-heading)' }}>
                         {siteSettings.contactPhone}
                       </a>
                     </div>
                   </div>
                 )}
                 {siteSettings?.contactAddress && (
-                  <div className="flex items-start gap-4 p-6 rounded-2xl bg-gray-light border border-gray-200 hover:border-[var(--accent)]/30 transition-colors duration-300">
+                  <div className="flex items-start gap-4 p-6 rounded-2xl border transition-colors duration-300"
+                    style={{ backgroundColor: 'var(--bg-badge)', borderColor: 'var(--card-border)' }}>
                     <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style={{ backgroundColor: `${primaryColor}12`, color: primaryColor }}>
                       <HiOutlineMapPin className="text-xl" />
                     </div>
                     <div>
-                      <p className="text-muted text-sm mb-1">Address</p>
-                      <p className="text-navy font-medium">{siteSettings.contactAddress}</p>
+                      <p className="text-sm mb-1" style={{ color: 'var(--text-muted)' }}>Address</p>
+                      <p className="font-medium" style={{ color: 'var(--text-heading)' }}>{siteSettings.contactAddress}</p>
                     </div>
                   </div>
                 )}
               </div>
 
               {siteSettings?.googleMapsUrl && (
-                <div className="mt-8 rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+                <div className="mt-8 rounded-2xl overflow-hidden border shadow-sm" style={{ borderColor: 'var(--card-border)' }}>
                   <iframe
                     src={siteSettings.googleMapsUrl}
                     width="100%"
@@ -85,7 +88,7 @@ export default function ContactPage() {
             </div>
 
             <div>
-              <h2 className="font-heading text-2xl font-bold text-navy mb-8">Send a Message</h2>
+              <h2 className="font-heading text-2xl font-bold mb-8" style={{ color: 'var(--text-heading)' }}>Send a Message</h2>
               <ContactForm primaryColor={primaryColor} />
             </div>
           </div>
