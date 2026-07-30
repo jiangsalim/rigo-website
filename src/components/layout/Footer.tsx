@@ -70,7 +70,7 @@ export default function Footer({
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-4">
               {logoSrc ? (
-                <div className="relative w-12 h-12 flex-shrink-0 rounded-full bg-navy flex items-center justify-center overflow-hidden shadow-lg">
+                <div className="relative w-12 h-12 flex-shrink-0 rounded-full bg-[#0A0A0A] flex items-center justify-center overflow-hidden shadow-lg">
                   <Image
                     src={logoSrc}
                     alt={siteTitle}
