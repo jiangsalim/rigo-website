@@ -30,16 +30,17 @@
     --accent-dark: #BF360C;
   }
 
-  .dark {
-    --background: #0A0A0A;
+  /* Dark mode overrides for light sections only */
+  [data-theme="dark"] {
+    --background: #1A1A1A;
     --foreground: #FFFFFF;
     --surface: #111111;
     --surface-alt: #1A1A1A;
-    --border: rgba(255, 255, 255, 0.05);
+    --border: rgba(255, 255, 255, 0.08);
     --muted: #A1A1A1;
-    --card-bg: rgba(255, 255, 255, 0.02);
+    --card-bg: #222222;
     --card-border: rgba(255, 255, 255, 0.05);
-    --section-bg: #0A0A0A;
+    --section-bg: #1A1A1A;
   }
 
   html {
@@ -123,12 +124,12 @@
 
   .section-white {
     @apply transition-colors duration-300;
-    background-color: #FAF9F6;
+    background-color: var(--background);
   }
 
   .section-gray {
     @apply transition-colors duration-300;
-    background-color: #F0EDE8;
+    background-color: var(--surface);
   }
 
   .section-dark {

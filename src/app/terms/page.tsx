@@ -83,7 +83,7 @@ export default async function TermsPage() {
             <h2 className="text-white text-xl font-bold mt-8">9. Governing Law</h2>
             <p className="text-gray-400">
               These terms shall be governed by and construed in accordance with the laws of 
-              Tanzania. Any disputes shall be subject to the exclusive jurisdiction of the courts of Tanzania.
+              Uganda. Any disputes shall be subject to the exclusive jurisdiction of the courts of Uganda.
             </p>
 
             <h2 className="text-white text-xl font-bold mt-8">10. Contact</h2>

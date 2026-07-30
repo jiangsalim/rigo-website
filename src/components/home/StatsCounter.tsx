@@ -136,7 +136,7 @@ export default function StatsCounter({
             Our Impact in Numbers
           </h2>
           <p className="text-white/50 max-w-2xl mx-auto text-sm">
-            Delivering excellence across Tanzania and beyond
+            Delivering excellence across Uganda and beyond
           </p>
           <div
             className="w-16 h-1 mx-auto mt-6 rounded-full"

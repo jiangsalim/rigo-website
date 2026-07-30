@@ -6,6 +6,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import FloatingActions from '@/components/ui/FloatingActions'
 import CookieBanner from '@/components/ui/CookieBanner'
+import DarkModeToggle from '@/components/ui/DarkModeToggle'
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteSettings = await sanityClient.fetch(SITE_SETTINGS_QUERY)
@@ -66,6 +67,7 @@ export default async function RootLayout({
           siteTitle={siteSettings?.siteTitle || 'RIGO DESIGN & CONSTRUCTION'}
         />
         <CookieBanner primaryColor={siteSettings?.primaryColor || '#E65100'} />
+        <DarkModeToggle />
       </body>
     </html>
   )
