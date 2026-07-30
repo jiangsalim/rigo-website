@@ -9,22 +9,22 @@
   --color-navy-light: #132D52;
   --color-teal: #00C2BA;
   --color-teal-dark: #00A8A0;
-  --color-charcoal: #374151;
-  --color-gray-light: #F8F9FA;
+  --color-charcoal: #4A4540;
+  --color-gray-light: #F0EDE8;
   --color-gray-medium: #9CA3AF;
 }
 
 @layer base {
   :root {
-    --background: #FFFFFF;
-    --foreground: #171717;
-    --surface: #F8F9FA;
-    --surface-alt: #f0f0f0;
-    --border: #e5e5e5;
-    --muted: #737373;
-    --card-bg: #ffffff;
-    --card-border: #e5e5e5;
-    --section-bg: #ffffff;
+    --background: #FAF9F6;
+    --foreground: #2D2A26;
+    --surface: #F0EDE8;
+    --surface-alt: #E8E4DE;
+    --border: #D6D0C8;
+    --muted: #8B8580;
+    --card-bg: #FFFFFF;
+    --card-border: #E0DCD6;
+    --section-bg: #FAF9F6;
     --accent: #E65100;
     --accent-light: #FF8A50;
     --accent-dark: #BF360C;
@@ -48,8 +48,8 @@
 
   body {
     font-family: var(--font-body);
-    background-color: var(--background);
-    color: var(--foreground);
+    background-color: #FAF9F6;
+    color: #2D2A26;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -107,13 +107,14 @@
 
   .btn-secondary {
     @apply border-2 font-semibold px-8 py-3 rounded-full transition-all duration-300 ease-out hover:shadow-lg active:scale-95;
-    border-color: var(--foreground);
-    color: var(--foreground);
+    border-color: #2D2A26;
+    color: #2D2A26;
   }
 
   .btn-secondary:hover {
-    background-color: var(--foreground);
-    color: var(--background);
+    background-color: #0A1F3F;
+    color: #FFFFFF;
+    border-color: #0A1F3F;
   }
 
   .btn-outline-light {
@@ -122,17 +123,22 @@
 
   .section-white {
     @apply transition-colors duration-300;
-    background-color: var(--background);
+    background-color: #FAF9F6;
   }
 
   .section-gray {
     @apply transition-colors duration-300;
-    background-color: var(--surface);
+    background-color: #F0EDE8;
   }
 
   .section-dark {
     @apply transition-colors duration-300;
-    background-color: var(--section-bg);
+    background-color: #0A0A0A;
+  }
+
+  .section-navy {
+    @apply transition-colors duration-300;
+    background-color: #0A1F3F;
   }
 
   .hover-lift {
@@ -141,7 +147,7 @@
 
   .hover-lift:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.10);
   }
 
   .text-gradient {
