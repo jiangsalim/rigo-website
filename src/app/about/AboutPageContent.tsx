@@ -2,8 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
+import Link from 'next/link'
 import { urlFor } from '@/lib/sanity.image'
-import { FaBuilding, FaClock, FaSmile, FaUsers } from 'react-icons/fa'
+import { FaBuilding, FaClock, FaSmile, FaUsers, FaLinkedin, FaTwitter } from 'react-icons/fa'
+import { BsDownload } from 'react-icons/bs'
 
 /* ========== CountUp Subcomponent ========== */
 function CountUp({ target, suffix, isInView }: { target: number; suffix: string; isInView: boolean }) {
@@ -169,17 +171,58 @@ export default function AboutPageContent({ teamMembers, siteSettings }: AboutPag
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {teamMembers.map((member: any) => (
                 <div key={member.name} className="text-center group">
-                  <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden bg-gray-light border-2 border-gray-200 group-hover:border-[var(--accent)]/50 transition-all duration-300 shadow-sm">
-                    {member.photo ? (
-                      <img src={urlFor(member.photo).width(200).height(200).url()} alt={member.name} className="w-full h-full object-cover" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-2xl font-heading font-bold text-muted">
-                        {member.name.split(' ').map((n: string) => n[0]).join('')}
-                      </div>
-                    )}
-                  </div>
-                  <h3 className="text-navy font-heading font-bold">{member.name}</h3>
+                  {/* Photo — clickable to detail page */}
+                  <Link href={`/about/team/${member.slug?.current}`}>
+                    <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden bg-gray-light border-2 border-gray-200 group-hover:border-[var(--accent)]/50 transition-all duration-300 shadow-sm">
+                      {member.photo ? (
+                        <img src={urlFor(member.photo).width(200).height(200).url()} alt={member.name} className="w-full h-full object-cover" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-2xl font-heading font-bold text-muted">
+                          {member.name.split(' ').map((n: string) => n[0]).join('')}
+                        </div>
+                      )}
+                    </div>
+                  </Link>
+
+                  {/* Name — clickable to detail page */}
+                  <Link href={`/about/team/${member.slug?.current}`}>
+                    <h3 className="text-navy font-heading font-bold hover:text-[var(--accent)] transition-colors">{member.name}</h3>
+                  </Link>
                   <p className="text-muted text-sm">{member.role}</p>
+
+                  {/* Social Icons */}
+                  {(member.socialLinks?.linkedin || member.socialLinks?.twitter) && (
+                    <div className="flex justify-center gap-1.5 mt-2">
+                      {member.socialLinks.linkedin && (
+                        <a href={member.socialLinks.linkedin} target="_blank" rel="noopener noreferrer"
+                          className="w-7 h-7 rounded-lg bg-[#0077B5]/10 flex items-center justify-center text-[#0077B5] text-xs hover:bg-[#0077B5] hover:text-white transition-all">
+                          <FaLinkedin />
+                        </a>
+                      )}
+                      {member.socialLinks.twitter && (
+                        <a href={member.socialLinks.twitter} target="_blank" rel="noopener noreferrer"
+                          className="w-7 h-7 rounded-lg bg-[#1DA1F2]/10 flex items-center justify-center text-[#1DA1F2] text-xs hover:bg-[#1DA1F2] hover:text-white transition-all">
+                          <FaTwitter />
+                        </a>
+                      )}
+                    </div>
+                  )}
+
+                  {/* CV Download Button */}
+                  {member.cv?.asset?.url && (
+                    <a href={member.cv.asset.url} target="_blank" rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 mt-2 text-xs font-medium hover:underline"
+                      style={{ color: primaryColor }}>
+                      <BsDownload size={12} /> Download CV
+                    </a>
+                  )}
+
+                  {/* View Profile Link */}
+                  <Link href={`/about/team/${member.slug?.current}`}
+                    className="inline-flex items-center gap-1 mt-1.5 text-xs font-medium hover:underline"
+                    style={{ color: primaryColor }}>
+                    View Profile →
+                  </Link>
                 </div>
               ))}
             </div>

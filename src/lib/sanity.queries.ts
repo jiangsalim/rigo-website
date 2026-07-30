@@ -211,13 +211,58 @@ export const PLAN_BY_SLUG_QUERY = groq`
   }
 `
 
-// Team Members
+// Team Members — for about page cards
 export const TEAM_MEMBERS_QUERY = groq`
   *[_type == "teamMember"] | order(order asc) {
     name,
+    slug,
     role,
-    photo,
-    bio
+    photo {
+      asset->{
+        _id,
+        url
+      }
+    },
+    bio,
+    email,
+    phone,
+    expertise,
+    socialLinks,
+    cv {
+      asset->{
+        _id,
+        url
+      }
+    },
+    order
+  }
+`
+
+// Team Member Detail — for individual profile page
+export const TEAM_MEMBER_BY_SLUG_QUERY = groq`
+  *[_type == "teamMember" && slug.current == $slug][0] {
+    name,
+    slug,
+    role,
+    photo {
+      asset->{
+        _id,
+        url
+      }
+    },
+    bio,
+    fullBio,
+    email,
+    phone,
+    expertise,
+    socialLinks,
+    cv {
+      asset->{
+        _id,
+        url
+      }
+    },
+    cvContent
   }
 `
 
