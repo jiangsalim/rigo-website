@@ -34,18 +34,18 @@ export default function FeaturedProjects({
   return (
     <section className="py-16 md:py-20">
       <Container>
-        <div className="flex flex-col sm:flex-row items-end justify-between mb-12">
-          <div className="flex-1">
-            <SectionHeading
-              heading={heading}
-              subheading={subheading}
-              accentColor={primaryColor}
-            />
-          </div>
+        {/* Centered heading + button on all screens */}
+        <div className="flex flex-col items-center text-center mb-12">
+          <SectionHeading
+            heading={heading}
+            subheading={subheading}
+            accentColor={primaryColor}
+            align="center"
+          />
           {projects.length > 0 && (
             <Link
               href="/projects"
-              className="btn-secondary text-sm whitespace-nowrap mb-6 sm:mb-0 border-navy text-navy hover:bg-navy hover:text-white"
+              className="btn-secondary text-sm mt-2 border-navy text-navy hover:bg-navy hover:text-white"
             >
               View All Projects →
             </Link>
@@ -65,10 +65,14 @@ export default function FeaturedProjects({
               >
                 <Link
                   href={project.slug?.current ? `/projects/${project.slug.current}` : '/projects'}
-                  className="hover-lift block bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 h-full"
+                  className="hover-lift block rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border h-full"
+                  style={{
+                    backgroundColor: 'var(--card-bg)',
+                    borderColor: 'var(--card-border)',
+                  }}
                 >
                   {/* Image */}
-                  <div className="relative h-56 overflow-hidden bg-gray-light">
+                  <div className="relative h-56 overflow-hidden" style={{ backgroundColor: 'var(--bg-badge)' }}>
                     {(project.mainImage?.asset?.url || project.coverImage?.asset?.url) ? (
                       <img
                         src={project.mainImage?.asset?.url || project.coverImage?.asset?.url}
@@ -77,7 +81,7 @@ export default function FeaturedProjects({
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
-                        <svg className="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-16 h-16" style={{ color: 'var(--text-muted)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                         </svg>
                       </div>
@@ -103,17 +107,17 @@ export default function FeaturedProjects({
 
                   {/* Content */}
                   <div className="p-6">
-                    <h3 className="font-heading font-bold text-xl text-navy mb-2 transition-colors duration-300 line-clamp-2">
+                    <h3 className="font-heading font-bold text-xl mb-2 transition-colors duration-300 line-clamp-2" style={{ color: 'var(--text-heading)' }}>
                       {project.title}
                     </h3>
 
                     {project.description && (
-                      <p className="text-charcoal text-sm leading-relaxed line-clamp-2 mb-4">
+                      <p className="text-sm leading-relaxed line-clamp-2 mb-4" style={{ color: 'var(--text-body)' }}>
                         {project.description}
                       </p>
                     )}
 
-                    <div className="flex items-center justify-between text-xs text-muted pt-4 border-t border-gray-100">
+                    <div className="flex items-center justify-between text-xs pt-4 border-t" style={{ borderColor: 'var(--card-border)', color: 'var(--text-muted)' }}>
                       {project.location && (
                         <span className="flex items-center gap-1">
                           <HiOutlineLocationMarker className="text-sm" style={{ color: primaryColor }} />
@@ -153,8 +157,8 @@ export default function FeaturedProjects({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
               </svg>
             </div>
-            <p className="text-charcoal text-lg font-medium">No projects yet</p>
-            <p className="text-muted text-sm mt-1">Add them in Sanity Studio to display here.</p>
+            <p className="text-lg font-medium" style={{ color: 'var(--text-heading)' }}>No projects yet</p>
+            <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>Add them in Sanity Studio to display here.</p>
           </div>
         )}
       </Container>
