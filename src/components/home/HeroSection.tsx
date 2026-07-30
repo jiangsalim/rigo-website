@@ -104,11 +104,7 @@ export default function HeroSection({
           className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-[1.08] text-white"
         >
           {firstPart}{' '}
-          <span className="text-gradient" style={{
-            background: `linear-gradient(135deg, ${primaryColor}, #FF8A50)`,
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-          }}>
+          <span style={{ color: primaryColor }}>
             {lastWord}
           </span>
         </motion.h1>
