@@ -36,22 +36,26 @@ export default function PlanDetailPage({ params }: { params: Promise<{ slug: str
           <Container>
             <div className="flex flex-wrap gap-3">
               {plan.specs.bedrooms && (
-                <span className="px-4 py-2 rounded-full bg-gray-light border border-gray-200 text-sm text-navy font-medium">
+                <span className="px-4 py-2 rounded-full border text-sm font-medium"
+                  style={{ backgroundColor: 'var(--bg-badge)', borderColor: 'var(--card-border)', color: 'var(--text-heading)' }}>
                   {plan.specs.bedrooms} Bedrooms
                 </span>
               )}
               {plan.specs.bathrooms && (
-                <span className="px-4 py-2 rounded-full bg-gray-light border border-gray-200 text-sm text-navy font-medium">
+                <span className="px-4 py-2 rounded-full border text-sm font-medium"
+                  style={{ backgroundColor: 'var(--bg-badge)', borderColor: 'var(--card-border)', color: 'var(--text-heading)' }}>
                   {plan.specs.bathrooms} Bathrooms
                 </span>
               )}
               {plan.specs.floors && (
-                <span className="px-4 py-2 rounded-full bg-gray-light border border-gray-200 text-sm text-navy font-medium">
+                <span className="px-4 py-2 rounded-full border text-sm font-medium"
+                  style={{ backgroundColor: 'var(--bg-badge)', borderColor: 'var(--card-border)', color: 'var(--text-heading)' }}>
                   {plan.specs.floors} Floors
                 </span>
               )}
               {plan.specs.squareFootage && (
-                <span className="px-4 py-2 rounded-full bg-gray-light border border-gray-200 text-sm text-navy font-medium">
+                <span className="px-4 py-2 rounded-full border text-sm font-medium"
+                  style={{ backgroundColor: 'var(--bg-badge)', borderColor: 'var(--card-border)', color: 'var(--text-heading)' }}>
                   {plan.specs.squareFootage}
                 </span>
               )}
@@ -78,17 +82,17 @@ export default function PlanDetailPage({ params }: { params: Promise<{ slug: str
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
-              <h2 className="font-heading text-2xl font-bold text-navy mb-6">About This Plan</h2>
-              <div className="prose prose-lg max-w-none text-charcoal">
+              <h2 className="font-heading text-2xl font-bold mb-6" style={{ color: 'var(--text-heading)' }}>About This Plan</h2>
+              <div className="prose prose-lg max-w-none" style={{ color: 'var(--text-body)' }}>
                 <PortableText value={plan.description} />
               </div>
             </div>
 
             <div className="space-y-6">
               {plan.downloadablePdf && (
-                <div className="p-6 rounded-2xl bg-gray-light border border-gray-200">
-                  <h3 className="font-heading text-lg font-bold text-navy mb-3">Download Plan</h3>
-                  <p className="text-charcoal text-sm mb-4">Get the full architectural plan in PDF format.</p>
+                <div className="p-6 rounded-2xl border" style={{ backgroundColor: 'var(--bg-badge)', borderColor: 'var(--card-border)' }}>
+                  <h3 className="font-heading text-lg font-bold mb-3" style={{ color: 'var(--text-heading)' }}>Download Plan</h3>
+                  <p className="text-sm mb-4" style={{ color: 'var(--text-body)' }}>Get the full architectural plan in PDF format.</p>
                   <a
                     href={urlFor(plan.downloadablePdf).url() || '#'}
                     target="_blank"
@@ -101,12 +105,12 @@ export default function PlanDetailPage({ params }: { params: Promise<{ slug: str
                 </div>
               )}
 
-              <div className="p-6 rounded-2xl bg-gray-light border border-gray-200">
-                <h3 className="font-heading text-lg font-bold text-navy mb-2">Interested?</h3>
-                <p className="text-charcoal text-sm mb-4">Contact us to discuss this plan or custom modifications.</p>
+              <div className="p-6 rounded-2xl border" style={{ backgroundColor: 'var(--bg-badge)', borderColor: 'var(--card-border)' }}>
+                <h3 className="font-heading text-lg font-bold mb-2" style={{ color: 'var(--text-heading)' }}>Interested?</h3>
+                <p className="text-sm mb-4" style={{ color: 'var(--text-body)' }}>Contact us to discuss this plan or custom modifications.</p>
                 <Link
                   href="/contact"
-                  className="btn-secondary w-full flex items-center justify-center text-sm border-navy text-navy hover:bg-navy hover:text-white"
+                  className="btn-secondary w-full flex items-center justify-center text-sm"
                 >
                   Inquire Now
                 </Link>
@@ -120,7 +124,7 @@ export default function PlanDetailPage({ params }: { params: Promise<{ slug: str
       {plan.gallery?.length > 0 && (
         <section className="section-gray py-20">
           <Container>
-            <h2 className="font-heading text-2xl font-bold text-navy mb-8">Plan Gallery</h2>
+            <h2 className="font-heading text-2xl font-bold mb-8" style={{ color: 'var(--text-heading)' }}>Plan Gallery</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {plan.gallery.map((image: any, index: number) => (
                 <img

@@ -83,18 +83,22 @@ export default function ServicesPage() {
                 <div key={category}>
                   <div className="flex items-center gap-3 mb-8">
                     <ServiceIcon category={category} primaryColor={primaryColor} />
-                    <h2 className="font-heading text-2xl font-bold text-navy">{category}</h2>
+                    <h2 className="font-heading text-2xl font-bold" style={{ color: 'var(--text-heading)' }}>{category}</h2>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {categoryServices.map((service: any) => (
                       <Link
                         key={service.slug.current}
                         href={`/services/${service.slug.current}`}
-                        className="hover-lift group block p-8 rounded-2xl border border-gray-200 bg-white hover:shadow-xl transition-all duration-300"
+                        className="hover-lift group block p-8 rounded-2xl border hover:shadow-xl transition-all duration-300"
+                        style={{
+                          backgroundColor: 'var(--card-bg)',
+                          borderColor: 'var(--card-border)',
+                        }}
                       >
                         <ServiceCardIcon service={service} primaryColor={primaryColor} />
-                        <h3 className="font-heading text-xl font-bold text-navy mb-3">{service.title}</h3>
-                        <p className="text-charcoal text-sm leading-relaxed mb-4">{service.shortDescription}</p>
+                        <h3 className="font-heading text-xl font-bold mb-3" style={{ color: 'var(--text-heading)' }}>{service.title}</h3>
+                        <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--text-body)' }}>{service.shortDescription}</p>
                         <span
                           className="inline-flex items-center gap-1 text-sm font-semibold transition-all group-hover:gap-2"
                           style={{ color: primaryColor }}
@@ -112,8 +116,8 @@ export default function ServicesPage() {
               <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: `${primaryColor}10` }}>
                 <FaHardHat className="text-3xl" style={{ color: primaryColor }} />
               </div>
-              <p className="text-charcoal text-lg font-medium">No services yet</p>
-              <p className="text-muted text-sm mt-1">Add them in Sanity Studio to display here.</p>
+              <p className="text-lg font-medium" style={{ color: 'var(--text-heading)' }}>No services yet</p>
+              <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>Add them in Sanity Studio to display here.</p>
             </div>
           )}
         </Container>

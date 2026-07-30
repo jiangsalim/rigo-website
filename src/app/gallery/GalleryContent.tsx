@@ -27,9 +27,12 @@ export default function GalleryContent({ photos, videos, primaryColor }: Gallery
               className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
                 activeTab === 'photos'
                   ? 'text-white shadow-lg'
-                  : 'bg-gray-light text-navy border border-gray-200 hover:shadow-md'
+                  : 'border hover:shadow-md'
               }`}
-              style={activeTab === 'photos' ? { backgroundColor: primaryColor } : {}}
+              style={activeTab === 'photos' 
+                ? { backgroundColor: primaryColor } 
+                : { backgroundColor: 'var(--bg-badge)', borderColor: 'var(--card-border)', color: 'var(--text-heading)' }
+              }
             >
               <HiPhotograph className="text-lg" />
               Photos ({photos.length})
@@ -39,9 +42,12 @@ export default function GalleryContent({ photos, videos, primaryColor }: Gallery
               className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
                 activeTab === 'videos'
                   ? 'text-white shadow-lg'
-                  : 'bg-gray-light text-navy border border-gray-200 hover:shadow-md'
+                  : 'border hover:shadow-md'
               }`}
-              style={activeTab === 'videos' ? { backgroundColor: primaryColor } : {}}
+              style={activeTab === 'videos' 
+                ? { backgroundColor: primaryColor } 
+                : { backgroundColor: 'var(--bg-badge)', borderColor: 'var(--card-border)', color: 'var(--text-heading)' }
+              }
             >
               <HiVideoCamera className="text-lg" />
               Videos ({videos.length})
@@ -90,9 +96,9 @@ export default function GalleryContent({ photos, videos, primaryColor }: Gallery
                 </div>
               ) : (
                 <div className="text-center py-20">
-                  <HiPhotograph className="text-5xl mx-auto mb-4 text-muted" />
-                  <p className="text-charcoal text-lg font-medium">No photos yet</p>
-                  <p className="text-muted text-sm mt-1">Add photos in Sanity Studio.</p>
+                  <HiPhotograph className="text-5xl mx-auto mb-4" style={{ color: 'var(--text-muted)' }} />
+                  <p className="text-lg font-medium" style={{ color: 'var(--text-heading)' }}>No photos yet</p>
+                  <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>Add photos in Sanity Studio.</p>
                 </div>
               )}
             </Container>
@@ -100,84 +106,84 @@ export default function GalleryContent({ photos, videos, primaryColor }: Gallery
         )}
 
         {/* Videos Grid */}
-{activeTab === 'videos' && (
-  <motion.section
-    key="videos"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -20 }}
-    className="section-white pb-24"
-  >
-    <Container>
-      {videos.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {videos.map((video: any, index: number) => {
-            // Determine video source
-            let videoSrc = null
-            if (video.videoSource === 'upload' && video.videoFile?.asset?.url) {
-              videoSrc = video.videoFile.asset.url
-            } else if (video.videoUrl) {
-              const videoId = video.videoUrl.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|vimeo\.com\/)([^&\s]+)/)?.[1]
-              const isYouTube = video.videoUrl.includes('youtube') || video.videoUrl.includes('youtu.be')
-              if (videoId) {
-                videoSrc = isYouTube
-                  ? `https://www.youtube.com/embed/${videoId}`
-                  : `https://player.vimeo.com/video/${videoId}`
-              }
-            }
+        {activeTab === 'videos' && (
+          <motion.section
+            key="videos"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="section-white pb-24"
+          >
+            <Container>
+              {videos.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {videos.map((video: any, index: number) => {
+                    let videoSrc = null
+                    if (video.videoSource === 'upload' && video.videoFile?.asset?.url) {
+                      videoSrc = video.videoFile.asset.url
+                    } else if (video.videoUrl) {
+                      const videoId = video.videoUrl.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|vimeo\.com\/)([^&\s]+)/)?.[1]
+                      const isYouTube = video.videoUrl.includes('youtube') || video.videoUrl.includes('youtu.be')
+                      if (videoId) {
+                        videoSrc = isYouTube
+                          ? `https://www.youtube.com/embed/${videoId}`
+                          : `https://player.vimeo.com/video/${videoId}`
+                      }
+                    }
 
-            return (
-              <motion.div
-                key={video.title + index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="rounded-2xl overflow-hidden shadow-sm border border-gray-200"
-              >
-                <div className="aspect-video bg-gray-light">
-                  {videoSrc ? (
-                    video.videoSource === 'upload' ? (
-                      <video
-                        src={videoSrc}
-                        controls
-                        className="w-full h-full object-cover"
-                        poster={video.thumbnail ? urlFor(video.thumbnail).width(800).url() : undefined}
-                      />
-                    ) : (
-                      <iframe
-                        src={videoSrc}
-                        className="w-full h-full"
-                        allowFullScreen
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
-                      />
+                    return (
+                      <motion.div
+                        key={video.title + index}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 }}
+                        className="rounded-2xl overflow-hidden shadow-sm border"
+                        style={{ borderColor: 'var(--card-border)' }}
+                      >
+                        <div className="aspect-video" style={{ backgroundColor: 'var(--bg-badge)' }}>
+                          {videoSrc ? (
+                            video.videoSource === 'upload' ? (
+                              <video
+                                src={videoSrc}
+                                controls
+                                className="w-full h-full object-cover"
+                                poster={video.thumbnail ? urlFor(video.thumbnail).width(800).url() : undefined}
+                              />
+                            ) : (
+                              <iframe
+                                src={videoSrc}
+                                className="w-full h-full"
+                                allowFullScreen
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+                              />
+                            )
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center">
+                              <HiPlay className="text-4xl" style={{ color: 'var(--text-muted)' }} />
+                            </div>
+                          )}
+                        </div>
+                        <div className="p-4" style={{ backgroundColor: 'var(--card-bg)' }}>
+                          <p className="font-semibold text-sm" style={{ color: 'var(--text-heading)' }}>{video.title}</p>
+                          {video.category && (
+                            <span className="text-xs" style={{ color: 'var(--text-muted)' }}>{video.category}</span>
+                          )}
+                        </div>
+                      </motion.div>
                     )
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <HiPlay className="text-4xl text-muted" />
-                    </div>
-                  )}
+                  })}
                 </div>
-                <div className="p-4">
-                  <p className="text-navy font-semibold text-sm">{video.title}</p>
-                  {video.category && (
-                    <span className="text-xs text-muted">{video.category}</span>
-                  )}
+              ) : (
+                <div className="text-center py-20">
+                  <HiVideoCamera className="text-5xl mx-auto mb-4" style={{ color: 'var(--text-muted)' }} />
+                  <p className="text-lg font-medium" style={{ color: 'var(--text-heading)' }}>No videos yet</p>
+                  <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>Add videos in Sanity Studio.</p>
                 </div>
-              </motion.div>
-            )
-          })}
-        </div>
-      ) : (
-        <div className="text-center py-20">
-          <HiVideoCamera className="text-5xl mx-auto mb-4 text-muted" />
-          <p className="text-charcoal text-lg font-medium">No videos yet</p>
-          <p className="text-muted text-sm mt-1">Add videos in Sanity Studio.</p>
-        </div>
-      )}
-    </Container>
-  </motion.section>
-)}
+              )}
+            </Container>
+          </motion.section>
+        )}
       </AnimatePresence>
 
       {/* Lightbox */}

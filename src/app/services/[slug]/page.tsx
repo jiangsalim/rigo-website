@@ -1,20 +1,21 @@
-import { sanityClient } from '@/lib/sanity.client'
+'use client'
+
+import { use } from 'react'
+import { useSanity } from '@/hooks/useSanity'
 import { SERVICE_BY_SLUG_QUERY, SITE_SETTINGS_QUERY } from '@/lib/sanity.queries'
 import { urlFor } from '@/lib/sanity.image'
-import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Container from '@/components/ui/Container'
 import PageHero from '@/components/shared/PageHero'
 import { PortableText } from '@portabletext/react'
 
-export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-  
-  const service = await sanityClient.fetch(SERVICE_BY_SLUG_QUERY, { slug })
-  const siteSettings = await sanityClient.fetch(SITE_SETTINGS_QUERY)
+export default function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params)
+  const { data: service } = useSanity(SERVICE_BY_SLUG_QUERY, { slug })
+  const { data: siteSettings } = useSanity(SITE_SETTINGS_QUERY)
   const primaryColor = siteSettings?.primaryColor || '#E65100'
 
-  if (!service) notFound()
+  if (!service) return null
 
   return (
     <main>
@@ -40,8 +41,8 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <section className="section-white py-20">
         <Container>
           <div className="max-w-3xl">
-            <h2 className="font-heading text-2xl font-bold text-navy mb-6">About This Service</h2>
-            <div className="prose prose-lg max-w-none text-charcoal">
+            <h2 className="font-heading text-2xl font-bold mb-6" style={{ color: 'var(--text-heading)' }}>About This Service</h2>
+            <div className="prose prose-lg max-w-none" style={{ color: 'var(--text-body)' }}>
               <PortableText value={service.fullDescription} />
             </div>
           </div>

@@ -9,7 +9,7 @@ import Link from 'next/link'
 import Container from '@/components/ui/Container'
 import PageHero from '@/components/shared/PageHero'
 import { FaLinkedin, FaTwitter, FaGlobe, FaEnvelope, FaPhone, FaDownload } from 'react-icons/fa'
-import { BsArrowLeft, BsDownload } from 'react-icons/bs'
+import { BsArrowLeft } from 'react-icons/bs'
 
 export default function TeamMemberPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params)
@@ -34,7 +34,7 @@ export default function TeamMemberPage({ params }: { params: Promise<{ slug: str
 
       <section className="section-white py-12">
         <Container>
-          <Link href="/about" className="inline-flex items-center gap-2 text-charcoal hover:text-navy transition-colors mb-8 text-sm">
+          <Link href="/about" className="inline-flex items-center gap-2 text-sm mb-8 transition-colors" style={{ color: 'var(--text-body)' }}>
             <BsArrowLeft /> Back to About
           </Link>
 
@@ -43,7 +43,8 @@ export default function TeamMemberPage({ params }: { params: Promise<{ slug: str
             <div className="lg:col-span-1">
               <div className="sticky top-28 space-y-6">
                 {/* Photo */}
-                <div className="aspect-square rounded-2xl overflow-hidden bg-gray-light border border-gray-200 shadow-sm">
+                <div className="aspect-square rounded-2xl overflow-hidden border shadow-sm"
+                  style={{ backgroundColor: 'var(--bg-badge)', borderColor: 'var(--card-border)' }}>
                   {member.photo && (
                     <img src={urlFor(member.photo).width(400).height(400).url()} alt={member.name}
                       className="w-full h-full object-cover" />
@@ -54,13 +55,23 @@ export default function TeamMemberPage({ params }: { params: Promise<{ slug: str
                 <div className="space-y-3">
                   {member.email && (
                     <a href={`mailto:${member.email}`}
-                      className="flex items-center gap-3 p-3 rounded-xl bg-gray-light border border-gray-200 text-sm text-navy hover:shadow-md transition-all">
+                      className="flex items-center gap-3 p-3 rounded-xl border text-sm hover:shadow-md transition-all"
+                      style={{
+                        backgroundColor: 'var(--bg-badge)',
+                        borderColor: 'var(--card-border)',
+                        color: 'var(--text-heading)',
+                      }}>
                       <FaEnvelope style={{ color: primaryColor }} /> {member.email}
                     </a>
                   )}
                   {member.phone && (
                     <a href={`tel:${member.phone.replace(/\D/g, '')}`}
-                      className="flex items-center gap-3 p-3 rounded-xl bg-gray-light border border-gray-200 text-sm text-navy hover:shadow-md transition-all">
+                      className="flex items-center gap-3 p-3 rounded-xl border text-sm hover:shadow-md transition-all"
+                      style={{
+                        backgroundColor: 'var(--bg-badge)',
+                        borderColor: 'var(--card-border)',
+                        color: 'var(--text-heading)',
+                      }}>
                       <FaPhone style={{ color: primaryColor }} /> {member.phone}
                     </a>
                   )}
@@ -90,7 +101,12 @@ export default function TeamMemberPage({ params }: { params: Promise<{ slug: str
                       )}
                       {member.socialLinks.website && (
                         <a href={member.socialLinks.website} target="_blank" rel="noopener noreferrer"
-                          className="w-10 h-10 rounded-xl bg-gray-light border border-gray-200 flex items-center justify-center text-navy hover:bg-navy hover:text-white transition-all">
+                          className="w-10 h-10 rounded-xl border flex items-center justify-center transition-all"
+                          style={{
+                            backgroundColor: 'var(--bg-badge)',
+                            borderColor: 'var(--card-border)',
+                            color: 'var(--text-heading)',
+                          }}>
                           <FaGlobe />
                         </a>
                       )}
@@ -105,7 +121,7 @@ export default function TeamMemberPage({ params }: { params: Promise<{ slug: str
               {/* Expertise */}
               {member.expertise?.length > 0 && (
                 <div>
-                  <h3 className="font-heading text-xl font-bold text-navy mb-4">Expertise</h3>
+                  <h3 className="font-heading text-xl font-bold mb-4" style={{ color: 'var(--text-heading)' }}>Expertise</h3>
                   <div className="flex flex-wrap gap-2">
                     {member.expertise.map((skill: string) => (
                       <span key={skill}
@@ -121,8 +137,8 @@ export default function TeamMemberPage({ params }: { params: Promise<{ slug: str
               {/* Full Bio */}
               {member.fullBio && (
                 <div>
-                  <h3 className="font-heading text-xl font-bold text-navy mb-4">About {member.name.split(' ')[0]}</h3>
-                  <div className="prose prose-lg max-w-none text-charcoal">
+                  <h3 className="font-heading text-xl font-bold mb-4" style={{ color: 'var(--text-heading)' }}>About {member.name.split(' ')[0]}</h3>
+                  <div className="prose prose-lg max-w-none" style={{ color: 'var(--text-body)' }}>
                     <PortableText value={member.fullBio} />
                   </div>
                 </div>
@@ -131,8 +147,8 @@ export default function TeamMemberPage({ params }: { params: Promise<{ slug: str
               {/* Structured CV */}
               {member.cvContent && (
                 <div>
-                  <h3 className="font-heading text-xl font-bold text-navy mb-4">Curriculum Vitae</h3>
-                  <div className="prose prose-lg max-w-none text-charcoal">
+                  <h3 className="font-heading text-xl font-bold mb-4" style={{ color: 'var(--text-heading)' }}>Curriculum Vitae</h3>
+                  <div className="prose prose-lg max-w-none" style={{ color: 'var(--text-body)' }}>
                     <PortableText value={member.cvContent} />
                   </div>
                 </div>

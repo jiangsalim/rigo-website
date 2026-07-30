@@ -44,7 +44,7 @@ export default function WhatWeOffer({
   primaryColor = '#E65100'
 }: WhatWeOfferProps) {
   const getIcon = (service: Service) => {
-    if (service.icon?.asset?.url) return null // Will render image
+    if (service.icon?.asset?.url) return null
     if (service.category && serviceIcons[service.category]) {
       const IconComponent = serviceIcons[service.category]
       return <IconComponent className="text-2xl" style={{ color: primaryColor }} />
@@ -74,23 +74,27 @@ export default function WhatWeOffer({
               >
                 <Link
                   href={service.slug?.current ? `/services/${service.slug.current}` : '/services'}
-                  className="hover-lift block bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 h-full"
+                  className="hover-lift block rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border h-full"
+                  style={{
+                    backgroundColor: 'var(--card-bg)',
+                    borderColor: 'var(--card-border)',
+                  }}
                 >
                   {/* Icon */}
                   <div
                     className="w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110"
-                    style={{ backgroundColor: `${primaryColor}10` }}
+                    style={{ backgroundColor: `${primaryColor}15` }}
                   >
                     {getIcon(service)}
                   </div>
 
                   {/* Title */}
-                  <h3 className="font-heading font-bold text-xl text-navy mb-3 transition-colors duration-300">
+                  <h3 className="font-heading font-bold text-xl mb-3 transition-colors duration-300" style={{ color: 'var(--text-heading)' }}>
                     {service.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-charcoal text-sm leading-relaxed line-clamp-3">
+                  <p className="text-sm leading-relaxed line-clamp-3" style={{ color: 'var(--text-body)' }}>
                     {service.shortDescription || service.description || 'Learn more about this service.'}
                   </p>
 
@@ -116,8 +120,8 @@ export default function WhatWeOffer({
             >
               <FaHardHat className="text-3xl" style={{ color: primaryColor }} />
             </div>
-            <p className="text-charcoal text-lg font-medium">No services added yet</p>
-            <p className="text-muted text-sm mt-1">Add them in Sanity Studio to display here.</p>
+            <p className="text-lg font-medium" style={{ color: 'var(--text-heading)' }}>No services added yet</p>
+            <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>Add them in Sanity Studio to display here.</p>
           </div>
         )}
       </Container>

@@ -17,7 +17,7 @@ export default function SectionHeading({
   align = 'center',
   theme = 'white'
 }: SectionHeadingProps) {
-  const isDark = theme === 'navy'
+  const isNavy = theme === 'navy'
 
   return (
     <motion.div
@@ -52,9 +52,8 @@ export default function SectionHeading({
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.5 }}
         viewport={{ once: true }}
-        className={`font-heading text-3xl md:text-4xl lg:text-5xl font-bold leading-tight ${
-          isDark ? 'text-white' : 'text-navy'
-        }`}
+        className={`font-heading text-3xl md:text-4xl lg:text-5xl font-bold leading-tight`}
+        style={{ color: isNavy ? '#FFFFFF' : 'var(--text-heading)' }}
       >
         {heading}
       </motion.h2>

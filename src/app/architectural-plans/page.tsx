@@ -33,9 +33,13 @@ export default function ArchitecturalPlansPage() {
                 <Link
                   key={plan.slug.current}
                   href={`/architectural-plans/${plan.slug.current}`}
-                  className="hover-lift group block rounded-2xl border border-gray-200 bg-white overflow-hidden transition-all duration-300 shadow-sm hover:shadow-xl"
+                  className="hover-lift group block rounded-2xl border overflow-hidden transition-all duration-300 shadow-sm hover:shadow-xl"
+                  style={{
+                    backgroundColor: 'var(--card-bg)',
+                    borderColor: 'var(--card-border)',
+                  }}
                 >
-                  <div className="aspect-[4/3] overflow-hidden bg-gray-light">
+                  <div className="aspect-[4/3] overflow-hidden" style={{ backgroundColor: 'var(--bg-badge)' }}>
                     {plan.previewImage ? (
                       <img
                         src={urlFor(plan.previewImage).width(600).height(450).url()}
@@ -44,7 +48,7 @@ export default function ArchitecturalPlansPage() {
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
-                        <svg className="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-16 h-16" style={{ color: 'var(--text-muted)' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                         </svg>
                       </div>
@@ -54,11 +58,11 @@ export default function ArchitecturalPlansPage() {
                     <span className="text-xs uppercase tracking-wider mb-2 block font-semibold" style={{ color: primaryColor }}>
                       {plan.category}
                     </span>
-                    <h3 className="font-heading text-lg font-bold text-navy mb-3 transition-colors duration-300">
+                    <h3 className="font-heading text-lg font-bold mb-3 transition-colors duration-300" style={{ color: 'var(--text-heading)' }}>
                       {plan.title}
                     </h3>
                     {plan.specs && (
-                      <div className="flex flex-wrap gap-3 text-xs text-muted">
+                      <div className="flex flex-wrap gap-3 text-xs" style={{ color: 'var(--text-muted)' }}>
                         {plan.specs.bedrooms && <span className="flex items-center gap-1">🛏 {plan.specs.bedrooms} Beds</span>}
                         {plan.specs.bathrooms && <span>• {plan.specs.bathrooms} Baths</span>}
                         {plan.specs.floors && <span>• {plan.specs.floors} Floors</span>}
@@ -85,8 +89,8 @@ export default function ArchitecturalPlansPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
               </div>
-              <p className="text-charcoal text-lg font-medium">No architectural plans yet</p>
-              <p className="text-muted text-sm mt-1">Add them in Sanity Studio to display here.</p>
+              <p className="text-lg font-medium" style={{ color: 'var(--text-heading)' }}>No architectural plans yet</p>
+              <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>Add them in Sanity Studio to display here.</p>
             </div>
           )}
         </Container>

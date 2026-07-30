@@ -28,6 +28,13 @@
     --accent: #E65100;
     --accent-light: #FF8A50;
     --accent-dark: #BF360C;
+    --text-heading: #0A1F3F;
+    --text-body: #4A4540;
+    --text-muted: #8B8580;
+    --text-link: #E65100;
+    --bg-input: #FFFFFF;
+    --bg-badge: #F0EDE8;
+    --bg-icon: rgba(230, 81, 0, 0.07);
   }
 
   /* Dark mode overrides for light sections only */
@@ -37,10 +44,17 @@
     --surface: #111111;
     --surface-alt: #1A1A1A;
     --border: rgba(255, 255, 255, 0.08);
-    --muted: #A1A1A1;
+    --muted: #9CA3AF;
     --card-bg: #222222;
     --card-border: rgba(255, 255, 255, 0.05);
     --section-bg: #1A1A1A;
+    --text-heading: #FFFFFF;
+    --text-body: #D1D1D1;
+    --text-muted: #9CA3AF;
+    --text-link: #FF8A50;
+    --bg-input: #1A1A1A;
+    --bg-badge: #222222;
+    --bg-icon: rgba(230, 81, 0, 0.12);
   }
 
   html {
@@ -50,7 +64,7 @@
   body {
     font-family: var(--font-body);
     background-color: #FAF9F6;
-    color: #2D2A26;
+    color: var(--text-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -61,6 +75,7 @@
     font-family: var(--font-heading);
     font-weight: 700;
     line-height: 1.2;
+    color: var(--text-heading);
   }
 
   ::selection {
@@ -108,8 +123,8 @@
 
   .btn-secondary {
     @apply border-2 font-semibold px-8 py-3 rounded-full transition-all duration-300 ease-out hover:shadow-lg active:scale-95;
-    border-color: #2D2A26;
-    color: #2D2A26;
+    border-color: var(--text-heading);
+    color: var(--text-heading);
   }
 
   .btn-secondary:hover {

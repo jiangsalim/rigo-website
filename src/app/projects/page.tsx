@@ -32,7 +32,8 @@ export default function ProjectsPage() {
                 <Link
                   key={project.slug.current}
                   href={`/projects/${project.slug.current}`}
-                  className="group block relative overflow-hidden rounded-2xl aspect-[4/3] bg-gray-light shadow-sm hover:shadow-xl transition-all duration-300"
+                  className="group block relative overflow-hidden rounded-2xl aspect-[4/3] shadow-sm hover:shadow-xl transition-all duration-300"
+                  style={{ backgroundColor: 'var(--bg-badge)' }}
                 >
                   {project.coverImage && (
                     <img
@@ -66,8 +67,8 @@ export default function ProjectsPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5" />
                 </svg>
               </div>
-              <p className="text-charcoal text-lg font-medium">No projects yet</p>
-              <p className="text-muted text-sm mt-1">Add them in Sanity Studio to display here.</p>
+              <p className="text-lg font-medium" style={{ color: 'var(--text-heading)' }}>No projects yet</p>
+              <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>Add them in Sanity Studio to display here.</p>
             </div>
           )}
         </Container>
