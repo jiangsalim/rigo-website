@@ -70,13 +70,13 @@ export default function Footer({
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-4">
               {logoSrc ? (
-                <div className="relative w-12 h-12 flex-shrink-0 rounded-full overflow-hidden bg-white shadow-lg">
+                <div className="relative w-12 h-12 flex-shrink-0 rounded-full bg-navy flex items-center justify-center overflow-hidden shadow-lg">
                   <Image
                     src={logoSrc}
                     alt={siteTitle}
                     fill
                     sizes="48px"
-                    className="object-contain p-1"
+                    className="object-contain p-2"
                   />
                 </div>
               ) : (

@@ -55,13 +55,13 @@ export default function Header({ navItems, siteTitle, primaryColor, logo }: Head
           {/* Logo + Site Title */}
           <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
             {logoSrc ? (
-              <div className="relative w-12 h-12 flex-shrink-0 rounded-full overflow-hidden bg-white flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shadow-lg">
+              <div className="relative w-12 h-12 flex-shrink-0 rounded-full bg-navy flex items-center justify-center overflow-hidden transition-transform duration-300 group-hover:scale-110 shadow-lg">
                 <Image
                   src={logoSrc}
                   alt={siteTitle}
                   fill
                   sizes="48px"
-                  className="object-contain p-1"
+                  className="object-contain p-2"
                 />
               </div>
             ) : (
