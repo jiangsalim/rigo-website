@@ -5,6 +5,7 @@ import { HiOutlineMail, HiOutlinePhone } from 'react-icons/hi'
 import { HiOutlineMapPin } from 'react-icons/hi2'
 import { BsClock } from 'react-icons/bs'
 import CertificateBadge from '@/components/shared/CertificateBadge'
+import InstallPrompt from '@/components/ui/InstallPrompt'
 
 interface FooterProps {
   footerText: string
@@ -120,6 +121,11 @@ export default function Footer({
                 />
               </div>
             )}
+
+            {/* Install App Prompt */}
+            <div className="mb-4">
+              <InstallPrompt primaryColor={primaryColor} />
+            </div>
 
             {/* Social Links */}
             <div className="flex gap-2">

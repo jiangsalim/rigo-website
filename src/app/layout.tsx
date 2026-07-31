@@ -40,6 +40,14 @@ export default async function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" 
           rel="stylesheet" 
         />
+
+         {/* PWA Meta Tags */}
+         <link rel="manifest" href="/manifest.json" />
+         <meta name="theme-color" content="#0A1F3F" />
+         <meta name="apple-mobile-web-app-capable" content="yes" />
+         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+         <meta name="apple-mobile-web-app-title" content="RIGO Construction" />
+         <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
       <body className="font-body antialiased overflow-x-hidden">
         <Header
@@ -68,6 +76,20 @@ export default async function RootLayout({
         />
         <CookieBanner primaryColor={siteSettings?.primaryColor || '#E65100'} />
         <DarkModeToggle />
+        <script
+          dangerouslySetInnerHTML={{
+           __html: `
+             if ('serviceWorker' in navigator) {
+               window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').then(
+                  (registration) => console.log('SW registered:', registration.scope),
+                  (err) => console.log('SW registration failed:', err)
+                );
+             });
+            }
+          `,
+         }}
+        />
       </body>
     </html>
   )
