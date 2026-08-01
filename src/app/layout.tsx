@@ -9,20 +9,27 @@ import CookieBanner from '@/components/ui/CookieBanner'
 import DarkModeToggle from '@/components/ui/DarkModeToggle'
 import StructuredData from '@/components/shared/StructuredData'
 
+const siteUrl = 'https://rigo-design-construction-co-ltd.vercel.app'
+
 export async function generateMetadata(): Promise<Metadata> {
   const siteSettings = await sanityClient.fetch(SITE_SETTINGS_QUERY)
+  const title = siteSettings?.siteTitle || 'RIGO DESIGN & CONSTRUCTION CO. LTD'
+  const description = siteSettings?.siteDescription || 'Premium construction and architectural design services in Uganda'
 
   return {
-    metadataBase: new URL('https://rigo-design-construction-co-ltd.vercel.app'),
+    metadataBase: new URL(siteUrl),
     title: {
-      default: siteSettings?.siteTitle || 'RIGO DESIGN & CONSTRUCTION CO. LTD',
-      template: `%s | ${siteSettings?.siteTitle || 'RIGO DESIGN & CONSTRUCTION'}`,
+      default: title,
+      template: `%s | ${title}`,
     },
-    description: siteSettings?.siteDescription || 'Premium construction and architectural design services in Uganda — from concept to completion.',
-    keywords: ['construction', 'architectural design', 'building', 'renovation', 'Uganda', 'commercial construction', 'residential construction', 'RIGO'],
-    authors: [{ name: 'RIGO DESIGN & CONSTRUCTION CO. LTD' }],
-    creator: 'RIGO DESIGN & CONSTRUCTION CO. LTD',
-    publisher: 'RIGO DESIGN & CONSTRUCTION CO. LTD',
+    description,
+    keywords: ['construction Uganda', 'architectural design', 'building contractor', 'renovation', 'commercial construction', 'residential construction', 'RIGO'],
+    authors: [{ name: title }],
+    creator: title,
+    publisher: title,
+    verification: {
+      google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || '',
+    },
     formatDetection: {
       email: false,
       address: false,
@@ -31,23 +38,16 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       type: 'website',
       locale: 'en_UG',
-      url: 'https://rigo-design-construction-co-ltd.vercel.app',
-      siteName: siteSettings?.siteTitle || 'RIGO DESIGN & CONSTRUCTION',
-      title: siteSettings?.siteTitle || 'RIGO DESIGN & CONSTRUCTION CO. LTD',
-      description: siteSettings?.siteDescription || 'Premium construction and architectural design services in Uganda.',
-      images: [
-        {
-          url: '/icon-512.png',
-          width: 512,
-          height: 512,
-          alt: siteSettings?.siteTitle || 'RIGO DESIGN & CONSTRUCTION',
-        },
-      ],
+      url: siteUrl,
+      siteName: title,
+      title,
+      description,
+      images: [{ url: '/icon-512.png', width: 512, height: 512, alt: title }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: siteSettings?.siteTitle || 'RIGO DESIGN & CONSTRUCTION CO. LTD',
-      description: siteSettings?.siteDescription || 'Premium construction and architectural design services in Uganda.',
+      title,
+      description,
       images: ['/icon-512.png'],
     },
     robots: {
