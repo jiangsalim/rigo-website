@@ -16,9 +16,34 @@ interface PageHeroProps {
   primaryColor?: string
 }
 
+function BreadcrumbSchema({ breadcrumbs }: { breadcrumbs: BreadcrumbItem[] }) {
+  const siteUrl = 'https://rigo-design-construction-co-ltd.vercel.app'
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((crumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: crumb.label,
+      item: crumb.href ? `${siteUrl}${crumb.href}` : undefined,
+    })),
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  )
+}
+
 export default function PageHero({ title, subtitle, breadcrumbs, primaryColor = '#E65100' }: PageHeroProps) {
   return (
     <section className="relative pt-36 pb-20 bg-navy overflow-hidden">
+      {/* Breadcrumb Schema */}
+      <BreadcrumbSchema breadcrumbs={breadcrumbs} />
+
       {/* Decorative Background */}
       <div className="absolute inset-0 z-0 opacity-5">
         <div className="h-full w-full bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:60px_60px]" />
@@ -33,11 +58,12 @@ export default function PageHero({ title, subtitle, breadcrumbs, primaryColor = 
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, duration: 0.6 }}
           className="flex items-center flex-wrap gap-2 text-sm mb-6"
+          aria-label="Breadcrumb"
         >
           {breadcrumbs.map((crumb, index) => (
             <span key={index} className="flex items-center gap-2">
               {index > 0 && (
-                <svg className="w-3 h-3 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-3 h-3 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               )}

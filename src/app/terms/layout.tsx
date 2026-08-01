@@ -3,15 +3,15 @@ import { Metadata } from 'next'
 const siteUrl = 'https://rigo-design-construction-co-ltd.vercel.app'
 
 export const metadata: Metadata = {
-  title: 'Gallery',
-  description: 'View photos and videos of our construction projects, architectural designs, and completed works in Uganda.',
+  title: 'Terms & Conditions',
+  description: 'Terms and conditions for using RIGO DESIGN & CONSTRUCTION CO. LTD website and services.',
   alternates: {
-    canonical: `${siteUrl}/gallery`,
+    canonical: `${siteUrl}/terms`,
   },
   openGraph: {
-    title: 'Gallery | RIGO DESIGN & CONSTRUCTION',
-    description: 'View photos and videos of our construction projects, architectural designs, and completed works.',
-    url: `${siteUrl}/gallery`,
+    title: 'Terms & Conditions | RIGO DESIGN & CONSTRUCTION',
+    description: 'Terms and conditions for using our website and services.',
+    url: `${siteUrl}/terms`,
     siteName: 'RIGO DESIGN & CONSTRUCTION CO. LTD',
     locale: 'en_UG',
     type: 'website',

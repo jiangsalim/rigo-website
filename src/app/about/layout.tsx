@@ -1,14 +1,15 @@
 import { Metadata } from 'next'
 
+const siteUrl = 'https://rigo-design-construction-co-ltd.vercel.app'
+
 export const metadata: Metadata = {
   title: 'About Us',
-  description: 'Learn about RIGO DESIGN & CONSTRUCTION CO. LTD — our mission, vision, team, and commitment to quality construction in Uganda.',
-  openGraph: {
-    title: 'About Us | RIGO DESIGN & CONSTRUCTION',
-    description: 'Learn about our mission, vision, team, and commitment to quality construction in Uganda.',
+  description: 'Learn about RIGO DESIGN & CONSTRUCTION — our mission, vision, team, and commitment to quality construction in Uganda.',
+  alternates: {
+    canonical: `${siteUrl}/about`,
   },
 }
 
-export default function AboutLayout({ children }: { children: React.ReactNode }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return <>{children}</>
 }
